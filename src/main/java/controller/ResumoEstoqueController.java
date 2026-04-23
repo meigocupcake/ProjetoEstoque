@@ -29,13 +29,13 @@ public class ResumoEstoqueController extends HttpServlet{
                      FROM produtos
                      """;
         
-        try(Connection coon = ConnectionFactory.getConnection();
-                PreparedStatement stmt = conn.preparedStatement(sql);
+        try (Connection conn = ConnectionFactory.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql);
                 ResultSet rs stmt.executeQuery()){
                     int entrada = 0;
                     int saida = 0;
                     
-                    if(rs.next()){
+                    if (rs.next()) {
                         entrada = rs.getInt("entrada");
                         saida = rs.getInt("saida");
                     }
@@ -53,7 +53,7 @@ public class ResumoEstoqueController extends HttpServlet{
                     response.getWriter().write(json);
                     
                     
-        }catch(Exception e){
+        }catch (Exception e) {
                 e.printStackTrace();
         }
          }

@@ -4,6 +4,7 @@ import connection.ConnectionFactory;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import model.UserModel;
+import util.SenhaUtil;
 
 public class UserDAO {
     
@@ -19,7 +20,16 @@ public class UserDAO {
             
             ResultSet rs = stmt.executeQuery();
             
-            return rs.next();
+            if(rs.next()){
+                String hashBanco = rs.getString("psw");
+                
+                return SenhaUtil.verificarSenha(
+                        userModel.getPassword(),
+                        hashBanco
+                );
+            }
+            
+            return false;
    
         } catch (Exception e) {
             e.printStackTrace();

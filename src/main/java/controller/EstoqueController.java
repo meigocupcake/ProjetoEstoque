@@ -16,10 +16,16 @@ import model.CadastroProdutoModel;
  */
 @WebServlet("/api/estoque")
 public class EstoqueController extends HttpServlet{
+    
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
          throws IIOException, IOException{
+         
+         String nome = request.getParameter("nome");
+         String tipo = request.getParameter("tipo");
+         String data = request.getParameter("data");
+         
          CadastroProdutosDAO dao = new CadastroProdutosDAO();
-         List<CadastroProdutoModel> list = dao.listar();
+         List<CadastroProdutoModel> lista = dao.listarComFiltro();
          
          String json = new Gson().toJson(lista);
          

@@ -5,6 +5,7 @@ public class UserModel {
     private int id;
     private String username;
     private String password;
+    private String funcao;
     
     public UserModel(){
         
@@ -34,5 +35,12 @@ public class UserModel {
         this.id = id;
     }
     
+    public String getFuncao(){
+        return funcao;
+    }
+    
+    public void setFuncao(String funcao) {
+        this.funcao = funcao;
+    }
     
 }

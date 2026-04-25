@@ -1,5 +1,6 @@
 package controller;
 
+import com.google.gson.Gson;
 import connection.ConnectionFactory;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -29,9 +30,9 @@ public class ResumoEstoqueController extends HttpServlet{
                      FROM produtos
                      """;
         
-        try (Connection conn = ConnectionFactory.getConnection();
-                PreparedStatement stmt = conn.prepareStatement(sql);
-                ResultSet rs stmt.executeQuery()){
+        try (Connection  conn = ConnectionFactory.getConnection();
+                 PreparedStatement stmt = conn.prepareStatement (sql);
+                 ResultSet rs =stmt.executeQuery()){
                     int entrada = 0;
                     int saida = 0;
                     

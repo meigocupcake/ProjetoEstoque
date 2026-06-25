@@ -19,10 +19,11 @@ public class UserDAO {
             stmt.setString(1, userModel.getUsername());
             
             ResultSet rs = stmt.executeQuery();
+
+            
             
             if(rs.next()){
                 String hashBanco = rs.getString("psw");
-                
                 boolean senhaValida = SenhaUtil.verificarSenha(
                         userModel.getPassword(),
                         hashBanco

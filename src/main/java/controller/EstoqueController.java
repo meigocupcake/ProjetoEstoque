@@ -9,7 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 import javax.imageio.IIOException;
-import model.CadastroProdutoModel;
+
+import model.ProdutoModel;
 
 /**
  *
@@ -26,7 +27,7 @@ public class EstoqueController extends HttpServlet{
          String data = request.getParameter("data");
          
          CadastroProdutosDAO dao = new CadastroProdutosDAO();
-         List <CadastroProdutoModel> lista = dao.listarComFiltro(nome,tipo, data);
+         List<ProdutoModel> lista = dao.listarComFiltro(nome,tipo, data);
          
          String json = new Gson().toJson(lista);
          

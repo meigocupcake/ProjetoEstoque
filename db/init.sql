@@ -36,7 +36,7 @@ INSERT INTO users (
     sexo, dtaNascimento, email, telefone, funcao,
     cep, endereco, numero, bairro, cidade, estado, complemento
 ) VALUES (
-    'admin', '1234', 'Admin', 'Sistema', '0001', '000.000.000-00',
+    'admin', '$2a$10$YjPKIe/vO8Ax38Ikz/Hnmuce8uTQXAs6xkQ3wIRApDL4bQwdpfbbi', 'Admin', 'Sistema', '0001', '000.000.000-00',
     'Masculino', '1990-01-01', 'admin@email.com', '71999999999', 'Administrador',
     '40000-000', 'Rua Exemplo', '123', 'Centro', 'Salvador', 'BA', 'N/A'
 );
@@ -49,10 +49,21 @@ CREATE TABLE produtos(
     marca VARCHAR(255),
     data_fabricacao DATE,
     data_vencimento DATE,
-    quantidade BIGINT,
     valor DECIMAL (10,2),
-    total DECIMAL (10,2),
-    satus VARCHAR(255)
-    total DECIMAL (10,2)
+    status VARCHAR(255),
+    local_armazenamento VARCHAR(100),
+    minimo_estoque INT
+);
+
+CREATE TABLE operacoes
+(
+    id            INT AUTO_INCREMENT PRIMARY KEY,
+    id_produto    INT,
+    operacao      VARCHAR(100),
+    quantidade    INT,
+    data_operacao DATE,
+    CONSTRAINT fk_operacao_produto
+        FOREIGN KEY (id_produto) REFERENCES produtos (id)
+            ON DELETE SET NULL ON UPDATE CASCADE
 );
 

@@ -1,155 +1,244 @@
-body {
-    background-color: var(--gray-light);
-    color: var(--gray-dark);
-    padding: 20px;
-}
-
-#header {
-    text-align: center;
-}
-
-#tituloDashboard {
-    font-size: 20px;
-    color: var(--primary-dark);
-    margin-bottom: 10px;
-}
-
-#resumoEstoque {
+.pagina{
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 30px;
-    gap: 20px;
+    width: 100vw;
+    height: 100vw;
+    padding: 6px;
 }
 
-.card-resumo {
-    background-color: var(--white);
-    box-shadow: 0 4px 6px var(--shadow-default);
-    border-radius: 10px;
-    flex: 1;
-    padding: 20px;
-    text-align: center;
-    transition: transform 0.2s;
-}
-
-.card-resumo:hover {
-    transform: translateY(-5px);
-}
-
-.titulo-card {
-    font-size: 20px;
-    margin-bottom: 10px;
-    color: var(--primary-medium);
-}
-
-.valor-card {
-    font-size: 15px;
-    font-weight: bold;
-    color: var(--primary-dark);
-}
-
-#filtro {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px;
-    margin-bottom: 20px;
-    justify-content: center;
-    align-items: center;
-}
-
-.grupo-filtro {
+.menu{
     display: flex;
     flex-direction: column;
+    border: solid #ccc;
+    background-color: white;
+    gap: 2%;
+    width: 30vw;
+    height: 100vw;
+    padding: 1%;
 }
 
-.input-filtro,
-.select-filtro {
-    padding: 8px 10px;
-    border-radius: 5px;
-    border: 1px solid var(--gray-medium);
-    outline: none;
-}
-
-.input-filtro:focus,
-.select-filtro:focus {
-    border-color: var(--primary-medium); 
-}
-
-.botao-pesquisa
-.btn-pesquisa {
-    margin-top: 0;
-    padding: 10px 20px;
-    background-color: var(--primary-medium);
-    color: var(--white);
-    border: none;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.botao-pesquisa
-.btn-pesquisa:hover {
-    background-color: var(--primary-dark);
-}
-
-.tabela-wrapper {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: var(--white);
-    box-shadow: 0 4px 6px var(--shadow-default);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-#tabelaEstoque th,
-#tabelaEstoque td {
-    padding: 8px 15px;
-    text-align: center;
-    border-bottom: 1px solid var(--primary-dark);
-}
-
-#tabelaEstoque th {
-    background-color: var(--primary-medium);
-    color: var(--white);
-    font-weight: bold;
-}
-
-#tabelaEstoque tr:nth-child(even) {
-    background-color: var(--gray-light);
-}
-
-#paginacao {
-    margin-top: 20px;
+.perfil{
     display: flex;
+    background-color: #A5C3A780;
+    border-radius: 6px;
+    padding: 10%;
+    gap: 10%;
+}
+
+.perfilCartao{
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 10px;
 }
 
-.controle-paginacao label {
-    font-size: 15px;
-    color: var(--primary-dark);
+.perfilCartao li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 10px;
+    height: 20px;
+    padding: 5%;
 }
 
-#pagina {
-    border: 1px solid var(--primary-medium);
-    border-radius: 5px;
+.listaMenu{
+    display: flex;
+    flex-direction: column;
+    gap: 5%;
+
 }
 
-.conteiner-btn
-#btnVoltar,
-#btnProximo{
-    margin-top: 0;
-    padding: 5px 10px;
-    background-color: var(--primary-medium);
-    color: var(--white);
+.listaMenu li{
+    display: flex;
+    justify-content: center;
+    background-color: #A5C3A7;
     border: none;
     border-radius: 10px;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    padding: 2%;
+
 }
 
-.conteiner-btn
-#btnVoltar
-#btnProximo:hover {
-    background-color: var(--primary-dark);
+.tabela th{
+    padding: 10px;
 }
+
+.botao{
+    display: flex;
+    justify-content: center;
+    background-color: #A5C3A7;
+    border: none;
+    border-radius: 10px;
+    margin: 2%;
+    padding: 2%;
+}
+
+.busca{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    margin: 2%;
+    padding: 2%;
+    width: 300px;
+}
+
+.busca input{
+    border: none;
+    outline: none;
+    width: 100%;
+}
+/*body {*/
+/*    background-color: var(--gray-light);*/
+/*    color: var(--gray-dark);*/
+/*    padding: 20px;*/
+/*}*/
+
+/*#header {*/
+/*    text-align: center;*/
+/*}*/
+
+/*#tituloDashboard {*/
+/*    font-size: 20px;*/
+/*    color: var(--primary-dark);*/
+/*    margin-bottom: 10px;*/
+/*}*/
+
+/*#resumoEstoque {*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    margin-bottom: 30px;*/
+/*    gap: 20px;*/
+/*}*/
+
+/*.card-resumo {*/
+/*    background-color: var(--white);*/
+/*    box-shadow: 0 4px 6px var(--shadow-default);*/
+/*    border-radius: 10px;*/
+/*    flex: 1;*/
+/*    padding: 20px;*/
+/*    text-align: center;*/
+/*    transition: transform 0.2s;*/
+/*}*/
+
+/*.card-resumo:hover {*/
+/*    transform: translateY(-5px);*/
+/*}*/
+
+/*.titulo-card {*/
+/*    font-size: 20px;*/
+/*    margin-bottom: 10px;*/
+/*    color: var(--primary-medium);*/
+/*}*/
+
+/*.valor-card {*/
+/*    font-size: 15px;*/
+/*    font-weight: bold;*/
+/*    color: var(--primary-dark);*/
+/*}*/
+
+/*#filtro {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 15px;*/
+/*    margin-bottom: 20px;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
+
+/*.grupo-filtro {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*}*/
+
+/*.input-filtro,*/
+/*.select-filtro {*/
+/*    padding: 8px 10px;*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid var(--gray-medium);*/
+/*    outline: none;*/
+/*}*/
+
+/*.input-filtro:focus,*/
+/*.select-filtro:focus {*/
+/*    border-color: var(--primary-medium); */
+/*}*/
+
+/*.botao-pesquisa*/
+/*.btn-pesquisa {*/
+/*    margin-top: 0;*/
+/*    padding: 10px 20px;*/
+/*    background-color: var(--primary-medium);*/
+/*    color: var(--white);*/
+/*    border: none;*/
+/*    border-radius: 100px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.2s;*/
+/*}*/
+
+/*.botao-pesquisa*/
+/*.btn-pesquisa:hover {*/
+/*    background-color: var(--primary-dark);*/
+/*}*/
+
+/*.tabela-wrapper {*/
+/*    width: 100%;*/
+/*    border-collapse: collapse;*/
+/*    background-color: var(--white);*/
+/*    box-shadow: 0 4px 6px var(--shadow-default);*/
+/*    border-radius: 5px;*/
+/*    overflow: hidden;*/
+/*}*/
+
+/*#tabelaEstoque th,*/
+/*#tabelaEstoque td {*/
+/*    padding: 8px 15px;*/
+/*    text-align: center;*/
+/*    border-bottom: 1px solid var(--primary-dark);*/
+/*}*/
+
+/*#tabelaEstoque th {*/
+/*    background-color: var(--primary-medium);*/
+/*    color: var(--white);*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*#tabelaEstoque tr:nth-child(even) {*/
+/*    background-color: var(--gray-light);*/
+/*}*/
+
+/*#paginacao {*/
+/*    margin-top: 20px;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*.controle-paginacao label {*/
+/*    font-size: 15px;*/
+/*    color: var(--primary-dark);*/
+/*}*/
+
+/*#pagina {*/
+/*    border: 1px solid var(--primary-medium);*/
+/*    border-radius: 5px;*/
+/*}*/
+
+/*.conteiner-btn*/
+/*#btnVoltar,*/
+/*#btnProximo{*/
+/*    margin-top: 0;*/
+/*    padding: 5px 10px;*/
+/*    background-color: var(--primary-medium);*/
+/*    color: var(--white);*/
+/*    border: none;*/
+/*    border-radius: 10px;*/
+/*    cursor: pointer;*/
+/*    transition: background-color 0.2s;*/
+/*}*/
+
+/*.conteiner-btn*/
+/*#btnVoltar*/
+/*#btnProximo:hover {*/
+/*    background-color: var(--primary-dark);*/
+/*}*/

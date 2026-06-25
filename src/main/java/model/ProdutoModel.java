@@ -1,7 +1,7 @@
 package model;
 
 public class ProdutoModel {
-    
+
     private int id;
     private String codigoBarras;
     private String nomeProduto;
@@ -9,10 +9,35 @@ public class ProdutoModel {
     private String marca;
     private String dataFabricacao;
     private String dataVencimento;
-    private long quantidade;
     private String valor;
-    private String total;
     private String status;
+    private String localArmazenamento;
+
+    public String getLocalArmazenamento() {
+        return localArmazenamento;
+    }
+
+    public void setLocalArmazenamento(String localArmazenamento) {
+        this.localArmazenamento = localArmazenamento;
+    }
+
+    public long getMinimoEstoque() {
+        return minimoEstoque;
+    }
+
+    public void setMinimoEstoque(long minimoEstoque) {
+        this.minimoEstoque = minimoEstoque;
+    }
+
+    private long minimoEstoque;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getCodigoBarras() {
         return codigoBarras;
@@ -62,13 +87,6 @@ public class ProdutoModel {
         this.dataVencimento = dataVencimento;
     }
 
-    public long getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(long quantidade) {
-        this.quantidade = quantidade;
-    }
 
     public String getValor() {
         return valor;
@@ -76,14 +94,6 @@ public class ProdutoModel {
 
     public void setValor(String valor) {
         this.valor = valor;
-    }
-
-    public String getTotal() {
-        return total;
-    }
-
-    public void setTotal(String total) {
-        this.total = total;
     }
     
     public String getStatus() {

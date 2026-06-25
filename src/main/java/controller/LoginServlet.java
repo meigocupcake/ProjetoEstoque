@@ -20,22 +20,20 @@ public class LoginServlet extends HttpServlet{
         
         String usuario = request.getParameter("users");
         String senha = request.getParameter("passw");
-        
         UserModel userModel = new UserModel();
         userModel.setUsername(usuario);
         userModel.setPassword(senha);
         
         UserDAO dao = new UserDAO();
-        
+
         UserModel user = dao.validarLogin(userModel);
-        
+
         if(user != null) {
             HttpSession session =
                     request.getSession();
             
             session.setAttribute("usuario", user.getUsername());
             session.setAttribute("perfil", user.getFuncao());
-            
             response.sendRedirect(request.getContextPath() + "/pages/dashboard.html");
         }else{
             response.sendRedirect(request.getContextPath() + "/index.html");

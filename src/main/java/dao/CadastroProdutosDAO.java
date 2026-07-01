@@ -13,8 +13,8 @@ public class CadastroProdutosDAO {
         public boolean salvar(ProdutoModel produto){
         String sql = "INSERT INTO produtos" + 
 
-                "(codigo_barras, nome_produto, fabricante, marca, data_fabricacao, data_vencimento, valor, status, local_armazenamento, minimo_estoque)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "(codigo_barras, nome_produto, fabricante, marca, valor, status, local_armazenamento, minimo_estoque)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
                
         try(Connection conn = ConnectionFactory.getConnection();
@@ -25,12 +25,10 @@ public class CadastroProdutosDAO {
             stmt.setString(2, produto.getNomeProduto());
             stmt.setString(3, produto.getFabricante());
             stmt.setString(4, produto.getMarca());
-            stmt.setDate(5, java.sql.Date.valueOf(produto.getDataFabricacao()));
-            stmt.setDate(6, java.sql.Date.valueOf(produto.getDataVencimento()));
-            stmt.setString(7, produto.getValor());
-            stmt.setString(8, produto.getStatus());
-            stmt.setString(9, produto.getLocalArmazenamento());
-            stmt.setLong(10, produto.getMinimoEstoque());
+            stmt.setString(5, produto.getValor());
+            stmt.setString(6, produto.getStatus());
+            stmt.setString(7, produto.getLocalArmazenamento());
+            stmt.setLong(8, produto.getMinimoEstoque());
 
             
             stmt.executeUpdate();
@@ -50,8 +48,6 @@ public class CadastroProdutosDAO {
                 "nome_produto = ?, " +
                 "fabricante = ?, " +
                 "marca = ?, " +
-                "data_fabricacao = ?, " +
-                "data_vencimento = ?, " +
                 "valor = ?, " +
                 "status = ?, " +
                 "local_armazenamento = ?, " +
@@ -68,13 +64,11 @@ public class CadastroProdutosDAO {
             stmt.setString(2, produto.getNomeProduto());
             stmt.setString(3, produto.getFabricante());
             stmt.setString(4, produto.getMarca());
-            stmt.setDate(5, java.sql.Date.valueOf(produto.getDataFabricacao()));
-            stmt.setDate(6, java.sql.Date.valueOf(produto.getDataVencimento()));
-            stmt.setString(7, produto.getValor());
-            stmt.setString(8, produto.getStatus());
-            stmt.setString(9, produto.getLocalArmazenamento());
-            stmt.setLong(10, produto.getMinimoEstoque());
-            stmt.setInt(11, produto.getId());
+            stmt.setString(5, produto.getValor());
+            stmt.setString(6, produto.getStatus());
+            stmt.setString(7, produto.getLocalArmazenamento());
+            stmt.setLong(8, produto.getMinimoEstoque());
+            stmt.setInt(9, produto.getId());
 
             stmt.executeUpdate();
 
@@ -161,9 +155,6 @@ public class CadastroProdutosDAO {
                 p.setStatus(rs.getString("status"));
                 p.setLocalArmazenamento(rs.getString("local_armazenamento"));
                 p.setMinimoEstoque(rs.getLong("minimo_estoque"));
-                p.setDataVencimento(rs.getDate("data_vencimento").toString());
-                p.setDataFabricacao(rs.getDate("data_fabricacao").toString());
-
 
                 lista.add(p);
             }

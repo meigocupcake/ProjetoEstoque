@@ -14,14 +14,14 @@ Feature List
 - Visualização de todos os produtos cadastrados;
     - GET todos os produtos OK
 - Controle de entrada de produtos;
-    - Tabela que relaciona produtos a quantidades e ações
+    - Tabela que relaciona produtos a quantidades e ações 
       Ex: Entrou 10 canetas
 - Controle de saída de produtos;
     - Mesma tabela de produtos a quantidades e ações
       Ex: Saiu 10 canetas
 - Exibição da quantidade total disponível em estoque;
     - Tira a média da tabela de produtos por quantidades e ações.
-- Identificação da prateleira ou local de armazenamento de cada produto;
+- Identificação da prateleira ou local de armazenamento de cada produto; OK
     - Campo novo na model do produto
 - Indicação da necessidade de reposição de estoque;
     - Tira a média da tabela de produtos e caso o produto esteja com poucas unidades, sinalizar baixo estoque

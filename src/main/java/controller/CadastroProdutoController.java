@@ -76,18 +76,17 @@ public class CadastroProdutoController extends HttpServlet{
             produto.setNomeProduto(produtoRequest.getNomeProduto());
             produto.setFabricante(produtoRequest.getFabricante());
             produto.setMarca(produtoRequest.getMarca());
-            produto.setDataFabricacao(produtoRequest.getDataFabricacao());
-            produto.setDataVencimento(produtoRequest.getDataVencimento());
             produto.setValor(produtoRequest.getValor());
             produto.setStatus(produtoRequest.getStatus());
             produto.setLocalArmazenamento(produtoRequest.getLocalArmazenamento());
             produto.setMinimoEstoque(produtoRequest.getMinimoEstoque());
 
             if(dao.atualizar(produto)){
-                response.sendRedirect("pages/dashboard.html");
+                response.setStatus(HttpServletResponse.SC_OK);
             }else{
-                response.sendRedirect("pages/cadastroProdutos.html");
+                response.setStatus((HttpServletResponse.SC_BAD_GATEWAY));
             }
+
 
         }catch(Exception e){
             e.printStackTrace();
@@ -122,9 +121,9 @@ public class CadastroProdutoController extends HttpServlet{
           System.out.println("id: " + id);
 
             if (dao.deletar(id)) {
-                response.sendRedirect("pages/dashboard.html");
-            } else {
-                response.sendRedirect("pages/cadastroProdutos.html");
+                response.setStatus(HttpServletResponse.SC_OK);
+            }else{
+                response.setStatus((HttpServletResponse.SC_BAD_GATEWAY));
             }
 
         }catch(Exception e){

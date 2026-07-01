@@ -1,0 +1,226 @@
+#modalEntrada::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+#modalEntrada {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    width: 90%;
+    max-width: 480px;
+    background-color: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+#modalEntrada h2 {
+    background-color: #D9A05B;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 16px 24px;
+    border-radius: 12px 12px 0 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+#formEntrada {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+}
+
+#modalEntrada .busca {
+    margin: 0;
+    padding: 10px 14px;
+    border: 1px solid #A5C3A780;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#modalEntrada .busca:focus-within {
+    border-color: #D9A05B;
+}
+
+#formEntrada .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#formEntrada label {
+    color: #4a4a4a;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+#formEntrada input[type="text"],
+#formEntrada input[type="number"],
+#formEntrada input[type="date"] {
+    padding: 10px 14px;
+    border: 1px solid #A5C3A780;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    background-color: #FFFFFF;
+    color: #2a2a2a;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#formEntrada input[type="text"]:focus,
+#formEntrada input[type="number"]:focus,
+#formEntrada input[type="date"]:focus {
+    border-color: #D9A05B;
+}
+
+#formEntrada input[type="number"]::-webkit-inner-spin-button,
+#formEntrada input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#formEntrada input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#formEntrada input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+    filter: invert(60%) sepia(40%) saturate(500%) hue-rotate(355deg) brightness(90%);
+}
+
+#formEntrada input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+#formEntrada input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+#formEntrada select {
+    padding: 10px 14px;
+    border: 1px solid #A5C3A780;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    color: #4a4a4a;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23808080' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+#formEntrada select:focus {
+    border-color: #D9A05B;
+}
+
+#formEntrada select:invalid {
+    color: #808080;
+}
+
+#formEntrada select option {
+    color: #2a2a2a;
+    background-color: #FFFFFF;
+    padding: 8px;
+}
+
+#formEntrada select option[value=""] {
+    color: #808080;
+}
+
+#formEntrada .linhaCampos {
+    display: flex;
+    gap: 12px;
+}
+
+#formEntrada .linhaCampos .campo {
+    flex: 1;
+    min-width: 0;
+}
+
+.acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+.acoes button {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+.acoes button:active {
+    transform: scale(0.97);
+}
+
+#btnCancelar {
+    background-color: #E0DDD680;
+    color: #2a2a2a;
+}
+
+#btnCancelar:hover {
+    background-color: #C9C5BC;
+}
+
+.acoes button[type="submit"] {
+    background-color: #D9A05B80;
+    color: #2a2a2a;
+}
+
+.acoes button[type="submit"]:hover {
+    background-color: #D9A05B;
+    color: #FFFFFF;
+}
+
+#modalEntrada[open] {
+    animation: aparecer 0.25s ease-out;
+}
+
+#modalEntrada[open]::backdrop {
+    animation: fade 0.25s ease-out;
+}
+
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@media (max-width: 480px) {
+    #formEntrada .linhaCampos {
+        flex-direction: column;
+    }
+}

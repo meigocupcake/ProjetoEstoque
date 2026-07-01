@@ -47,8 +47,6 @@ CREATE TABLE produtos(
     nome_produto VARCHAR(255) NOT NULL,
     fabricante VARCHAR(255),
     marca VARCHAR(255),
-    data_fabricacao DATE,
-    data_vencimento DATE,
     valor DECIMAL (10,2),
     status VARCHAR(255),
     local_armazenamento VARCHAR(100),

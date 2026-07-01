@@ -1,186 +1,190 @@
 <!doctype html>
-<html>
-  <head>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-<!--    <link rel="stylesheet" href="../css/reset.css" />-->
-<!--    <link rel="stylesheet" href="../css/color.css" />-->
-    <link rel="stylesheet" href="../css/dashboard.css" />
-    <title>Dashboard</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  </head>
-  <body>
-  <div class="pagina">
-    <div class="menu">
-      <div class="perfil">
-        <div class="flex justify-center items-center w-20 h-20 rounded-full bg-black">
-          Foto
-        </div>
-        <div class="perfilCartao">
-          <li>
-            Nome
-          </li>
-          <li>
-            Cargo
-          </li>
-        </div>
-      </div>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../css/dashboard.css" />
+  <link rel="stylesheet" href="../css/modalEntrada.css" />
+  <link rel="stylesheet" href="../css/modalSaida.css" />
+  <link rel="stylesheet" href="../css/modalAcoes.css" />
+  <title>Dashboard</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div class="pagina">
 
-      <ul class="listaMenu">
+  <!-- MENU LATERAL -->
+  <aside class="menu">
+    <div class="perfil">
+      <div class="fotoPerfil">Foto</div>
+      <ul class="perfilCartao">
+        <li>Nome</li>
+        <li>Cargo</li>
         <li>
-          Dashboard
-        </li>
-        <li>
-        Gerenciar Produtos
-        </li>
-        <li>
-          Gerenciar Operações
+          <button id="btnLogout" class="botaoLogout">Sair</button>
         </li>
       </ul>
-
     </div>
 
-    <div>
-      <div>
-        <button id="btnOperacao" class="botao">
-          Registrar operação
-        </button>
-      </div>
-      <div class="busca">
-        <input type="search" placeholder="Pesquisar produtos...">
-      </div>
-      <div class="tabela">
-        <table>
-          <tr>
-            <th>Código de barras</th>
-            <th>Nome</th>
-            <th>Quantidade</th>
-            <th>Valor</th>
-            <th>Fabricante</th>
-            <th>Marca</th>
-          </tr>
-        </table>
-      </div>
+    <ul class="listaMenu">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="cadastroProdutos.html">Cadastrar Produto</a></li>
+      <li><a href="cadastro.html">Cadastrar Perfil</a></li>
+      <li>Gerenciar Produtos</li>
+      <li>Gerenciar Operações</li>
+    </ul>
+  </aside>
+
+  <main class="conteudo">
+
+    <div class="operacao">
+      <button id="btnEntrada" class="botaoEntrada">Registrar entrada</button>
+      <button id="btnSaida" class="botaoSaida">Registrar saída</button>
+      <button id="btnAuditoria" class="botaoAuditoria">Histórico</button>
     </div>
-  </div>
-  </body>
 
+    <!-- MODAL DE ENTRADA -->
+    <dialog id="modalEntrada">
+      <h2>Nova entrada</h2>
+      <form id="formEntrada">
+        <div class="campo">
+          <label for="produtoEntrada">Produto:</label>
+          <select id="produtoEntrada" name="produto" required>
+          </select>
+        </div>
+        <div>
+          <label for="quantidade">Quantidade:</label>
+          <input
+                  type="number"
+                  id="quantidade"
+                  name="quantidade"
+                  min="1"
+                  placeholder="Digite a quantidade"
+                  required
+          >
+        </div>
+        <div class="acoes">
+          <button type="button" id="btnCancelar">Cancelar</button>
+          <button type="submit">Salvar</button>
+        </div>
+      </form>
+    </dialog>
 
+    <dialog id="modalSaida">
+      <h2>Nova saída</h2>
+      <form id="formSaida">
+        <div class="campo">
+          <label for="produtoSaida">Produto:</label>
+          <select id="produtoSaida" name="produto" required>
+          </select>
+        </div>
 
+        <div class="campo">
+          <label for="quantidadeSaida">Quantidade:</label>
+          <input
+                  type="number"
+                  id="quantidadeSaida"
+                  name="quantidade"
+                  min="1"
+                  placeholder="Digite a quantidade"
+                  required
+          >
+        </div>
+        <div class="acoes">
+          <button type="button" id="btnCancelarSaida">Cancelar</button>
+          <button type="submit">Salvar</button>
+        </div>
+      </form>
+    </dialog>
 
-<!--  <body>-->
-<!--    <header id="header">-->
-<!--      <h1 id="tituloDashboard">Sistema de estoque</h1>-->
-<!--      <nav>-->
-<!--        <ul>-->
-<!--          <li><a href="dashboard.html">Inicio</a></li>-->
-<!--          <li><a href="#">Gerenciamento</a></li>-->
-<!--          <li><a href="cadastro.html" class="btn-menu">Cadastro</a></li>-->
-<!--          <li><a href="#" id="btnLogout">Sair</a></li>-->
-<!--        </ul>-->
-<!--      </nav>-->
-<!--    </header>-->
-<!--    <main>-->
-<!--      <section id="resumoEstoque">-->
-<!--        <div class="card-resumo">-->
-<!--          <h2 class="titulo-card">Entrada</h2>-->
-<!--          <p class="valor-card" id="cardEntrada">100</p>-->
-<!--        </div>-->
-<!--        <div class="card-resumo">-->
-<!--          <h2 class="titulo-card">Saída</h2>-->
-<!--          <p class="valor-card" id="cardSaida">80</p>-->
-<!--        </div>-->
-<!--        <div class="card-resumo">-->
-<!--          <h2 class="titulo-card">Total</h2>-->
-<!--          <p class="valor-card" id="cardTotal">20</p>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--      <section id="filtro">-->
-<!--        <div class="grupo-filtro">-->
-<!--          <label for="filtroData">Data</label>-->
-<!--          <input type="date" id="filtroData" class="input-filtro" />-->
-<!--        </div>-->
-<!--        <div class="grupo-filtro">-->
-<!--          <label for="tipoMovimentacao">Tipo</label>-->
-<!--          <select id="tipoMovimentacao" class="select-filtro">-->
-<!--            <option value="">Selecione uma opção</option>-->
-<!--            <option value="entrada">Entrada</option>-->
-<!--            <option value="saida">Saída</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="grupo-filtro pesquisa-nome">-->
-<!--          <label for="pesquisarNome">Pesquisar item</label>-->
-<!--          <input-->
-<!--            type="text"-->
-<!--            id="pesquisarNome"-->
-<!--            class="input-filtro"-->
-<!--            placeholder="Digite o nome do produto"-->
-<!--          />-->
-<!--        </div>-->
-<!--        <div class="grupo-filtro botao-pesquisa">-->
-<!--          <button id="btnPesquisar" class="btn-pesquisa">Pesquisar</button>-->
-<!--        </div>-->
-<!--        <div class="topo-tabela">-->
-<!--          <a href="../pages/cadastroProdutos.html" class="btn-add">+</a>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--      <section id="tabelaEstoqueContainer">-->
-<!--        <div class="tabela-wrapper">-->
-<!--          <table id="tabelaEstoque">-->
-<!--            <thead>-->
-<!--              <tr>-->
-<!--                <th>Código de barras</th>-->
-<!--                <th>Nome</th>-->
-<!--                <th>Fabricante</th>-->
-<!--                <th>Marca</th>-->
-<!--                <th>Quantidade</th>-->
-<!--                <th>Valor unitário</th>-->
-<!--                <th>Total</th>-->
-<!--                <th>Status</th>-->
-<!--              </tr>-->
-<!--            </thead>-->
-<!--            <tbody id="corpoTabela">-->
-<!--              <tr class="linha-item">-->
-<!--                <td>123456789</td>-->
-<!--                <td>Mouse</td>-->
-<!--                <td>Logitech</td>-->
-<!--                <td>MX</td>-->
-<!--                <td>10</td>-->
-<!--                <td>R$80,00</td>-->
-<!--                <td>R$800,00</td>-->
-<!--              </tr>-->
-<!--              <tr class="linha-item">-->
-<!--                <td>123456780</td>-->
-<!--                <td>Teclado</td>-->
-<!--                <td>Logitech</td>-->
-<!--                <td>MXC</td>-->
-<!--                <td>10</td>-->
-<!--                <td>R$90,00</td>-->
-<!--                <td>R$900,00</td>-->
-<!--              </tr>-->
-<!--            </tbody>-->
-<!--          </table>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--      <section id="paginacao">-->
-<!--        <div class="controle-paginacao">-->
-<!--          <label for="pagina">Página</label>-->
-<!--          <select id="pagina">-->
-<!--            <option value="1">1</option>-->
-<!--            <option value="2">2</option>-->
-<!--            <option value="3">3</option>-->
-<!--            <option value="4">4</option>-->
-<!--          </select>-->
-<!--        </div>-->
-<!--        <div class="conteiner-btn">-->
-<!--          <button id="btnVoltar" class="btn-voltar">Voltar</button>-->
-<!--          <button id="btnProximo" class="btn-proximo">Próximo</button>-->
-<!--        </div>-->
-<!--      </section>-->
-<!--    </main>-->
-<!--    <script src="../js/dashboard.js"></script>-->
-<!--    <script src="../js/filto.js"></script>-->
-<!--    <script src="../js/validarLogin.js"></script>-->
-<!--    <script src="../js/logout.js"></script>-->
-<!--  </body>-->
+    <dialog id="modalEditar">
+      <h2>Editar produto</h2>
+      <form id="formEditar">
+        <input type="hidden" id="editarId" name="idProduto" />
+
+        <div class="campo">
+          <label for="editarCodigoBarras">Código de barras:</label>
+          <input type="text" id="editarCodigoBarras" name="codigoBarras" required>
+        </div>
+
+        <div class="campo">
+          <label for="editarNome">Nome do produto:</label>
+          <input type="text" id="editarNome" name="nomeProduto" required>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarFabricante">Fabricante:</label>
+            <input type="text" id="editarFabricante" name="fabricante" required>
+          </div>
+          <div class="campo">
+            <label for="editarMarca">Marca:</label>
+            <input type="text" id="editarMarca" name="marca" required>
+          </div>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarValor">Valor:</label>
+            <input type="number" id="editarValor" name="valor" min="0" step="0.01" required>
+          </div>
+          <div class="campo">
+            <label for="editarLocal">Local de Armazenamento:</label>
+            <input type="text" id="editarLocal" name="localArmazenamento" required>
+          </div>
+        </div>
+
+        <div class="campo">
+          <label for="editarStatus">Status:</label>
+          <select id="editarStatus" name="status">
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+        </div>
+
+        <div class="acoes">
+          <button type="button" id="btnCancelarEditar">Cancelar</button>
+          <button type="submit">Salvar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="modalExcluir">
+      <input type="hidden" id="excluirId" name="idProduto" />
+      <h2>Excluir produto</h2>
+      <p id="textoExcluir">Tem certeza que deseja excluir este produto?</p>
+      <div class="acoes">
+        <button type="button" id="btnCancelarExcluir">Cancelar</button>
+        <button type="button" id="btnConfirmarExcluir" class="btnPerigo">Excluir</button>
+      </div>
+    </dialog>
+
+    <div class="busca">
+      <input type="search" placeholder="Pesquisar produtos...">
+    </div>
+
+    <div class="tabela">
+      <table>
+        <thead>
+        <tr>
+          <th>Código de barras</th>
+          <th>Nome</th>
+          <th>Valor</th>
+          <th>Fabricante</th>
+          <th>Marca</th>
+          <th>Local de Armazenamento</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody id="corpoTabela">
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+<script src="../js/modalEntrada.js"></script>
+<script src="../js/modalSaida.js"></script>
+<script src="../js/dashboard.js"></script>
+</body>
 </html>

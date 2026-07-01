@@ -1,0 +1,179 @@
+#modalSaida::backdrop {
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+}
+
+#modalSaida {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    width: 90%;
+    max-width: 480px;
+    background-color: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+#modalSaida h2 {
+    background-color: #B85C5C;
+    color: #FFFFFF;
+    margin: 0;
+    padding: 16px 24px;
+    border-radius: 12px 12px 0 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+#formSaida {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+}
+
+#formSaida .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#formSaida label {
+    color: #4a4a4a;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+#formSaida input[type="text"],
+#formSaida input[type="number"] {
+    padding: 10px 14px;
+    border: 1px solid #A5C3A780;
+    border-radius: 10px;
+    outline: none;
+    font-size: 1rem;
+    background-color: #FFFFFF;
+    color: #2a2a2a;
+    font-family: inherit;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+#formSaida input[type="text"]:focus,
+#formSaida input[type="number"]:focus {
+    border-color: #B85C5C;
+}
+
+#formSaida input[type="number"]::-webkit-inner-spin-button,
+#formSaida input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#formSaida input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+#formSaida select {
+    padding: 10px 14px;
+    border: 1px solid #A5C3A780;
+    border-radius: 10px;
+    background-color: #FFFFFF;
+    color: #4a4a4a;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    outline: none;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23808080' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+}
+
+#formSaida select:focus {
+    border-color: #B85C5C;
+}
+
+#formSaida select:invalid {
+    color: #808080;
+}
+
+#formSaida select option {
+    color: #2a2a2a;
+    background-color: #FFFFFF;
+    padding: 8px;
+}
+
+#formSaida select option[value=""] {
+    color: #808080;
+}
+
+#formSaida .acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 8px;
+}
+
+#formSaida .acoes button {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: inherit;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#formSaida .acoes button:active {
+    transform: scale(0.97);
+}
+
+#btnCancelarSaida {
+    background-color: #E0DDD680;
+    color: #2a2a2a;
+}
+
+#btnCancelarSaida:hover {
+    background-color: #C9C5BC;
+}
+
+#formSaida .acoes button[type="submit"] {
+    background-color: #B85C5C80;
+    color: #2a2a2a;
+}
+
+#formSaida .acoes button[type="submit"]:hover {
+    background-color: #B85C5C;
+    color: #FFFFFF;
+}
+
+#modalSaida[open] {
+    animation: aparecerSaida 0.25s ease-out;
+}
+
+#modalSaida[open]::backdrop {
+    animation: fadeSaida 0.25s ease-out;
+}
+
+@keyframes aparecerSaida {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeSaida {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}

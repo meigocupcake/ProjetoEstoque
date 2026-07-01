@@ -1,0 +1,150 @@
+#modalEditar,
+#modalExcluir {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);   
+    margin: 0;                           
+    width: 440px;
+    max-width: 92vw;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: var(--espaco-g);
+    border: none;
+    border-radius: var(--raio-medio);
+    box-shadow: var(--sombra);
+    color: var(--cinza-texto);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+
+#modalEditar::backdrop,
+#modalExcluir::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+}
+
+#modalEditar h2,
+#modalExcluir h2 {
+    margin-bottom: var(--espaco-m);
+    color: var(--escuro);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+
+#formEditar {
+    display: flex;
+    flex-direction: column;
+    gap: var(--espaco-p);
+}
+
+#formEditar .campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+#formEditar .linhaCampos {
+    display: flex;
+    gap: var(--espaco-m);
+}
+
+#formEditar .linhaCampos .campo {
+    flex: 1;
+}
+
+#formEditar label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cinza-texto);
+}
+
+#formEditar input,
+#formEditar select {
+    width: 100%;
+    padding: var(--espaco-p);
+    background-color: var(--branco);
+    border: 1px solid var(--verde-medio);
+    border-radius: var(--raio-pequeno);
+    font-size: 0.95rem;
+    color: var(--cinza-texto);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+#formEditar input:focus,
+#formEditar select:focus {
+    border-color: var(--verde-forte);
+}
+
+
+#textoExcluir {
+    margin-bottom: var(--espaco-g);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+#textoExcluir strong {
+    color: var(--escuro);
+}
+
+
+#modalEditar .acoes,
+#modalExcluir .acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--espaco-p);
+    margin-top: var(--espaco-m);
+}
+
+#modalEditar .acoes button,
+#modalExcluir .acoes button {
+    padding: var(--espaco-p) var(--espaco-g);
+    border: none;
+    border-radius: var(--raio-medio);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#modalEditar .acoes button:active,
+#modalExcluir .acoes button:active {
+    transform: scale(0.98);
+}
+
+
+#modalEditar .acoes button[type="submit"] {
+    background-color: var(--verde-medio);
+    color: var(--cinza-texto);
+}
+
+#modalEditar .acoes button[type="submit"]:hover {
+    background-color: var(--verde-forte);
+    color: var(--branco);
+}
+
+
+#btnCancelarEditar,
+#btnCancelarExcluir {
+    background-color: var(--branco);
+    color: var(--cinza-texto);
+    border: 1px solid var(--verde-medio) !important;
+}
+
+#btnCancelarEditar:hover,
+#btnCancelarExcluir:hover {
+    background-color: var(--verde-claro);
+}
+
+
+.btnPerigo {
+    background-color: var(--vermelho-medio);
+    color: var(--cinza-texto);
+}
+
+.btnPerigo:hover {
+    background-color: var(--vermelho-forte);
+    color: var(--branco);
+}

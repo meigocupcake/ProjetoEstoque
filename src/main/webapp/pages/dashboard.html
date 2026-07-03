@@ -103,7 +103,7 @@
 
         <div class="campo">
           <label for="editarCodigoBarras">Código de barras:</label>
-          <input type="text" id="editarCodigoBarras" name="codigoBarras" required>
+          <input type="text" id="editarCodigoBarras" name="codigoBarras" inputmode="numeric" pattern="[0-9]+" title="Apenas números" required>
         </div>
 
         <div class="campo">
@@ -133,12 +133,30 @@
           </div>
         </div>
 
-        <div class="campo">
-          <label for="editarStatus">Status:</label>
-          <select id="editarStatus" name="status">
-            <option value="Ativo">Ativo</option>
-            <option value="Inativo">Inativo</option>
-          </select>
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarStatus">Status:</label>
+            <select id="editarStatus" name="status" required>
+              <option value="" disabled hidden>Selecione o status</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="editarEstoqueMinimo">Quantidade mínima de estoque:</label>
+            <input type="number" id="editarEstoqueMinimo" name="minimoEstoque" min="1" required>
+          </div>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarDataFabricacao">Data de fabricação:</label>
+            <input type="date" id="editarDataFabricacao" name="dataFabricacao" required>
+          </div>
+          <div class="campo">
+            <label for="editarDataVencimento">Data de vencimento:</label>
+            <input type="date" id="editarDataVencimento" name="dataVencimento" required>
+          </div>
         </div>
 
         <div class="acoes">
@@ -162,21 +180,45 @@
       <input type="search" placeholder="Pesquisar produtos...">
     </div>
 
-    <div class="tabela">
+    <div class="tabela" id="tabelaProdutos">
       <table>
         <thead>
         <tr>
           <th>Código de barras</th>
           <th>Nome</th>
+          <th>Quantidade</th>
           <th>Valor</th>
           <th>Fabricante</th>
           <th>Marca</th>
+          <th>Quantidade mínima</th>
           <th>Local de Armazenamento</th>
           <th>Status</th>
+          <th>Data de Fabricação</th>
+          <th>Data de Vencimento</th>
           <th>Ações</th>
         </tr>
         </thead>
         <tbody id="corpoTabela">
+        </tbody>
+      </table>
+    </div>
+
+    <!-- TABELA DE HISTÓRICO (mostrada ao clicar em "Histórico") -->
+    <div class="tabela tabelaHistorico" id="tabelaHistorico" hidden>
+      <table>
+        <thead>
+        <tr>
+          <th>Nome</th>
+          <th>Operação</th>
+          <th>Quantidade</th>
+          <th>Data</th>
+        </tr>
+        </thead>
+        <tbody id="corpoHistorico">
+        <!-- Sem dados: será preenchido futuramente -->
+        <tr class="linhaVazia">
+          <td colspan="4">Nenhum registro para exibir.</td>
+        </tr>
         </tbody>
       </table>
     </div>

@@ -4,6 +4,8 @@ public class OperacaoModel {
     private int id;
     private int idProduto;
     private String operacao;
+    private int quantidade;
+    private String dataOperacao;
 
     public int getId() {
         return id;
@@ -44,7 +46,4 @@ public class OperacaoModel {
     public void setDataOperacao(String dataOperacao) {
         this.dataOperacao = dataOperacao;
     }
-
-    private int quantidade;
-    private String dataOperacao;
 }

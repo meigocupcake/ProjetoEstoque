@@ -80,6 +80,8 @@ public class CadastroProdutoController extends HttpServlet{
             produto.setStatus(produtoRequest.getStatus());
             produto.setLocalArmazenamento(produtoRequest.getLocalArmazenamento());
             produto.setMinimoEstoque(produtoRequest.getMinimoEstoque());
+            produto.setDataVencimento(produtoRequest.getDataVencimento());
+            produto.setDataFabricacao(produtoRequest.getDataFabricacao());
 
             if(dao.atualizar(produto)){
                 response.setStatus(HttpServletResponse.SC_OK);

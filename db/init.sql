@@ -50,8 +50,12 @@ CREATE TABLE produtos(
     valor DECIMAL (10,2),
     status VARCHAR(255),
     local_armazenamento VARCHAR(100),
-    minimo_estoque INT
+    minimo_estoque INT,
+    data_vencimento DATE,
+    data_fabricacao DATE,
+    quantidade INT
 );
+
 
 CREATE TABLE operacoes
 (

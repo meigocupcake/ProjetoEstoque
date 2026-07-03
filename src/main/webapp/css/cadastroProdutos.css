@@ -247,6 +247,11 @@ ul {
     cursor: pointer;
 }
 
+/* Campos de data seguem o mesmo estilo dos demais inputs; só ajustamos o cursor */
+#formCadastroProduto input[type="date"] {
+    cursor: pointer;
+}
+
 #formCadastroProduto input:focus,
 #formCadastroProduto select:focus {
     border-color: var(--verde-forte);

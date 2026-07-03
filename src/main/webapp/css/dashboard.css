@@ -16,6 +16,11 @@
     --vermelho-forte: #B85C5C;
 
 
+    --azul-claro:  #6E8CB840;
+    --azul-medio:  #6E8CB880;
+    --azul-forte:  #6E8CB8;
+
+
     --branco:        #FFFFFF;
     --cinza-texto:   #4a4a4a;
     --cinza-claro:   #f5f5f5;
@@ -216,11 +221,22 @@ ul {
 }
 
 .botaoAuditoria {
-    background-color: var(--verde-medio);
+    background-color: var(--azul-medio);
 }
 
 .botaoAuditoria:hover {
+    background-color: var(--azul-forte);
+    color: var(--branco);
+}
+
+/* Estado ativo: histórico aberto -> botão fica verde e escrito "Dashboard" */
+.botaoAuditoria.ativo {
+    background-color: var(--verde-medio);
+}
+
+.botaoAuditoria.ativo:hover {
     background-color: var(--verde-forte);
+    color: var(--branco);
 }
 
 
@@ -258,10 +274,12 @@ ul {
     background-color: var(--branco);
     border-radius: var(--raio-medio);
     border: 1px solid var(--verde-medio);
+    overflow-x: auto;
 }
 
 .tabela table {
     width: 100%;
+    min-width: 1100px;
     border-collapse: collapse;
 }
 
@@ -272,12 +290,14 @@ ul {
     font-weight: 600;
     text-align: left;
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 .tabela td {
     padding: var(--espaco-p) var(--espaco-m);
     border-top: 1px solid var(--verde-claro);
     font-size: 0.9rem;
+    white-space: nowrap;
 }
 
 
@@ -333,4 +353,36 @@ ul {
 
 .btnAcao:active {
     transform: scale(0.92);
+}
+
+
+/* --------------------------------------------
+   TABELA DE HISTÓRICO (tons de azul)
+   Sobrescreve as cores verdes da .tabela
+   -------------------------------------------- */
+.tabela.tabelaHistorico {
+    border: 1px solid var(--azul-medio);
+}
+
+.tabela.tabelaHistorico th {
+    background-color: var(--azul-forte);
+}
+
+.tabela.tabelaHistorico td {
+    border-top: 1px solid var(--azul-claro);
+}
+
+.tabela.tabelaHistorico tbody tr:hover {
+    background-color: var(--azul-claro);
+}
+
+/* Estado vazio (sem registros) */
+.tabelaHistorico .linhaVazia td {
+    text-align: center;
+    color: var(--cinza-placeholder);
+    font-style: italic;
+}
+
+.tabelaHistorico .linhaVazia:hover {
+    background-color: transparent;
 }

@@ -13,8 +13,8 @@ public class CadastroProdutosDAO {
         public boolean salvar(ProdutoModel produto){
         String sql = "INSERT INTO produtos" + 
 
-                "(codigo_barras, nome_produto, fabricante, marca, valor, status, local_armazenamento, minimo_estoque)" +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "(codigo_barras, nome_produto, fabricante, marca, valor, status, local_armazenamento, minimo_estoque, data_vencimento, data_fabricacao, quantidade)" +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                
         try(Connection conn = ConnectionFactory.getConnection();
@@ -29,6 +29,10 @@ public class CadastroProdutosDAO {
             stmt.setString(6, produto.getStatus());
             stmt.setString(7, produto.getLocalArmazenamento());
             stmt.setLong(8, produto.getMinimoEstoque());
+            stmt.setDate(9, java.sql.Date.valueOf(produto.getDataVencimento()));
+            stmt.setDate(10, java.sql.Date.valueOf(produto.getDataFabricacao()));
+            stmt.setLong(11, produto.getQuantidade());
+
 
             
             stmt.executeUpdate();
@@ -51,7 +55,10 @@ public class CadastroProdutosDAO {
                 "valor = ?, " +
                 "status = ?, " +
                 "local_armazenamento = ?, " +
-                "minimo_estoque = ? " +
+                "minimo_estoque = ?, " +
+                "data_vencimento = ?, " +
+                "data_fabricacao = ?, " +
+                "quantidade = ? " +
                 "WHERE id = ?";
 
         System.out.println(sql);
@@ -68,7 +75,10 @@ public class CadastroProdutosDAO {
             stmt.setString(6, produto.getStatus());
             stmt.setString(7, produto.getLocalArmazenamento());
             stmt.setLong(8, produto.getMinimoEstoque());
-            stmt.setInt(9, produto.getId());
+            stmt.setDate(9, java.sql.Date.valueOf(produto.getDataVencimento()));
+            stmt.setDate(10, java.sql.Date.valueOf(produto.getDataFabricacao()));
+            stmt.setLong(11, produto.getQuantidade());
+            stmt.setInt(12, produto.getId());
 
             stmt.executeUpdate();
 
@@ -123,6 +133,9 @@ public class CadastroProdutosDAO {
                 p.setStatus(rs.getString("status"));
                 p.setLocalArmazenamento(rs.getString("local_armazenamento"));
                 p.setMinimoEstoque(rs.getLong("minimo_estoque"));
+                p.setDataVencimento(rs.getDate("data_vencimento").toString());
+                p.setDataFabricacao(rs.getDate("data_fabricacao").toString());
+                p.setQuantidade(rs.getInt("quantidade"));
 
                 return p;
             }
@@ -155,6 +168,9 @@ public class CadastroProdutosDAO {
                 p.setStatus(rs.getString("status"));
                 p.setLocalArmazenamento(rs.getString("local_armazenamento"));
                 p.setMinimoEstoque(rs.getLong("minimo_estoque"));
+                p.setDataVencimento(rs.getDate("data_vencimento").toString());
+                p.setDataFabricacao(rs.getDate("data_fabricacao").toString());
+                p.setQuantidade(rs.getInt("quantidade"));
 
                 lista.add(p);
             }

@@ -12,6 +12,16 @@ public class ProdutoModel {
     private String valor;
     private String status;
     private String localArmazenamento;
+    private long minimoEstoque;
+    private int quantidade;
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
+    }
 
     public String getLocalArmazenamento() {
         return localArmazenamento;
@@ -28,8 +38,6 @@ public class ProdutoModel {
     public void setMinimoEstoque(long minimoEstoque) {
         this.minimoEstoque = minimoEstoque;
     }
-
-    private long minimoEstoque;
 
     public int getId() {
         return id;
@@ -86,7 +94,6 @@ public class ProdutoModel {
     public void setDataVencimento(String dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
-
 
     public String getValor() {
         return valor;

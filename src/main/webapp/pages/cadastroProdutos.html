@@ -39,7 +39,7 @@
                     <form id="formCadastroProduto">
                         <div class="grupo-form">
                             <label>Código de Barras</label>
-                            <input type="text" name="codigoBarras" required />
+                            <input type="text" name="codigoBarras" inputmode="numeric" pattern="[0-9]+" title="Apenas números" required />
                         </div>
                         <div class="grupo-form">
                             <label>Nome do produto</label>
@@ -53,7 +53,8 @@
                             </div>
                             <div class="grupo-form">
                                 <label>Status:</label>
-                                <select name="status">
+                                <select name="status" required>
+                                    <option value="" disabled selected hidden>Selecione o status</option>
                                     <option value="Ativo">Ativo</option>
                                     <option value="Inativo">Inativo</option>
                                 </select>
@@ -72,12 +73,29 @@
 
                         <div class="linha-form">
                             <div class="grupo-form">
+                                <label>Data de Fabricação</label>
+                                <input type="date" name="dataFabricacao" required />
+                            </div>
+                            <div class="grupo-form">
+                                <label>Data de Vencimento</label>
+                                <input type="date" name="dataVencimento" required />
+                            </div>
+                        </div>
+
+                        <div class="linha-form">
+                            <div class="grupo-form">
                                 <label>Valor Unitário</label>
                                 <input type="number" name="valor" id="valorUnitario" min="0" step="0.01" required />
                             </div>
                             <div class="grupo-form">
+                                <label>Quantidade inicial</label>
+                                <input type="number" name="quantidade" id="quantidade" min="1" required />
+                            </div>
+                        </div>
+                        <div class="linha-form">
+                            <div class="grupo-form">
                                 <label>Quantidade mínima de estoque</label>
-                                <input type="number" name="estoqueMinimo" id="estoqueMinimo" min="0" required />
+                                <input type="number" name="estoqueMinimo" id="estoqueMinimo" min="1" required />
                             </div>
                         </div>
                         <div class="acoes-form">

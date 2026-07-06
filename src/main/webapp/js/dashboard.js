@@ -1,6 +1,5 @@
 let produtosCarregados = [];
 
-// Data de hoje em "yyyy-mm-dd" (local), usada como limite máximo da fabricação
 function dataHoje() {
     const d = new Date();
     const ano = d.getFullYear();
@@ -9,8 +8,6 @@ function dataHoje() {
     return `${ano}-${mes}-${dia}`;
 }
 
-// Datas obrigatórias, fabricação não posterior a hoje e vencimento não anterior à fabricação.
-// "yyyy-mm-dd" (ISO) pode ser comparado como texto, respeitando a ordem cronológica.
 function validarDatas(dataFabricacao, dataVencimento) {
     if (!dataFabricacao || !dataVencimento) {
         alert("Informe a data de fabricação e a data de vencimento.");
@@ -51,8 +48,8 @@ async function carregarEstoque(){
                        <td>R$ ${item.valor}</td>
                        <td>${item.fabricante}</td>
                        <td>${item.marca}</td>
-                       <td>${item.minimoEstoque ?? "-"}</td>
                        <td>${item.localArmazenamento}</td>
+                       <td>${item.minimoEstoque}</td>
                        <td>${item.status}</td>
                        <td>${item.dataFabricacao}</td>
                        <td>${item.dataVencimento}</td>
@@ -131,7 +128,6 @@ function editarProduto(codigo){
     const produto = produtosCarregados.find(p => String(p.id) === String(codigo));
     if (!produto) return;
 
-    // Preenche o formulário com os dados atuais do produto
     document.getElementById("editarId").value             = produto.id;
     document.getElementById("editarCodigoBarras").value   = produto.codigoBarras;
     document.getElementById("editarNome").value           = produto.nomeProduto;
@@ -144,7 +140,6 @@ function editarProduto(codigo){
     document.getElementById("editarDataFabricacao").value = produto.dataFabricacao;
     document.getElementById("editarDataVencimento").value = produto.dataVencimento;
 
-    // Mantém o mínimo do vencimento coerente com a fabricação já carregada
     document.getElementById("editarDataVencimento").min   = produto.dataFabricacao || "";
 
     document.getElementById("modalEditar").showModal();
@@ -160,13 +155,11 @@ function configurarModalEditar(){
         if (evento.target === modal) modal.close();
     });
 
-    // Sincroniza o mínimo do vencimento com a fabricação escolhida
     const dataFab = document.getElementById("editarDataFabricacao");
     const dataVen = document.getElementById("editarDataVencimento");
-    dataFab.max = dataHoje();   // fabricação não pode ser no futuro
+    dataFab.max = dataHoje();
     dataFab.addEventListener("change", () => { dataVen.min = dataFab.value; });
 
-    // Código de barras: permite apenas números
     const editarCodigoBarras = document.getElementById("editarCodigoBarras");
     editarCodigoBarras.addEventListener("input", () => {
         editarCodigoBarras.value = editarCodigoBarras.value.replace(/\D/g, '');
@@ -178,7 +171,6 @@ function configurarModalEditar(){
         const dataFabricacao = dataFab.value;
         const dataVencimento = dataVen.value;
 
-        // Valida as datas antes de enviar
         if (!validarDatas(dataFabricacao, dataVencimento)) {
             return;
         }
@@ -272,38 +264,61 @@ function configurarModalExcluir(){
     });
 }
 
+async function carregarHistorico(){
+    const corpoHistorico = document.getElementById("corpoHistorico");
+    const response = await fetch("http://localhost:8080/operacoes");
+    const dados = await response.json();
+
+    corpoHistorico.innerHTML="";
+
+    dados.forEach(item =>{
+        const linha = `
+                   <tr>
+                       <td>${item.nomeProduto}</td>
+                       <td>${item.operacao}</td>
+                       <td>${item.quantidade}</td>
+                       <td>${item.dataOperacao}</td>
+                   </tr>
+                   `;
+        corpoHistorico.innerHTML += linha;
+    });
+}
 
 
-function configurarHistorico(){
+async function configurarHistorico(){
     const botao           = document.getElementById("btnAuditoria");
     const tabelaProdutos  = document.getElementById("tabelaProdutos");
     const tabelaHistorico = document.getElementById("tabelaHistorico");
+
     const busca           = document.querySelector(".busca");
 
     botao.addEventListener("click", () => {
-        // Alterna o estado; "ativo" = histórico aberto (botão verde, escrito "Dashboard")
         const mostrandoHistorico = botao.classList.toggle("ativo");
 
         if (mostrandoHistorico) {
             botao.textContent = "Dashboard";
             tabelaProdutos.hidden  = true;
             tabelaHistorico.hidden = false;
-            if (busca) busca.hidden = true;   // a busca é dos produtos
+            if (busca) busca.hidden = true;
+            carregarEstoque();
         } else {
             botao.textContent = "Histórico";
             tabelaProdutos.hidden  = false;
             tabelaHistorico.hidden = true;
             if (busca) busca.hidden = false;
+            carregarHistorico();
         }
     });
 }
 
 
+
+
 window.onload = () => {
-        carregarEstoque();
-        carregarResumo();
-        configurarAcoesTabela();
-        configurarModalEditar();
-        configurarModalExcluir();
-        configurarHistorico();
+    carregarEstoque();
+    carregarHistorico();
+    configurarAcoesTabela();
+    configurarModalEditar();
+    configurarModalExcluir();
+    configurarHistorico();
 };

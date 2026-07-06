@@ -20,11 +20,19 @@ import java.util.Optional;
 public class CadastroProdutoController extends HttpServlet{
 
     private static final Gson gson = new Gson();
+    private final CadastroProdutosDAO dao = new CadastroProdutosDAO();
 
     public void doGet(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException{
 
-        CadastroProdutosDAO dao = new CadastroProdutosDAO();
+        String paramValue = request.getParameter("busca");
+        if(paramValue != null && !paramValue.isEmpty()){
+            List<ProdutoModel> lista = dao.getByBusca(paramValue);
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write(gson.toJson(lista));
+            return;
+        }
 
         // busca sem ID
         if (request.getPathInfo() == null || request.getPathInfo().length() < 2) {
@@ -59,7 +67,6 @@ public class CadastroProdutoController extends HttpServlet{
         try{
             int id = Integer.parseInt(request.getPathInfo().substring(1));
 
-            CadastroProdutosDAO dao = new CadastroProdutosDAO();
             ProdutoModel produto = dao.getById(id);
 
             if(produto == null){
@@ -102,7 +109,6 @@ public class CadastroProdutoController extends HttpServlet{
     public void doDelete(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException{
 
-
         try{
             if (request.getPathInfo() == null || request.getPathInfo().length() < 2) {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido");
@@ -112,7 +118,6 @@ public class CadastroProdutoController extends HttpServlet{
 
             int id = Integer.parseInt(request.getPathInfo().substring(1));
 
-            CadastroProdutosDAO dao = new CadastroProdutosDAO();
             ProdutoModel produto = dao.getById(id);
 
             if(produto == null){
@@ -138,22 +143,6 @@ public class CadastroProdutoController extends HttpServlet{
     public void doPost(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException {
             ProdutoModel produto = gson.fromJson(request.getReader(), ProdutoModel.class);
-//
-//            ProdutoModel produto = new ProdutoModel();
-//
-//
-//            produto.setCodigoBarras(request.getParameter("codigoBarras"));
-//            produto.setNomeProduto(request.getParameter("nomeProduto"));
-//            produto.setFabricante(request.getParameter("fabricante"));
-//            produto.setMarca(request.getParameter("marca"));
-//            produto.setDataFabricacao(request.getParameter("dataFabricacao"));
-//            produto.setDataVencimento(request.getParameter("dataVencimento"));
-//            produto.setValor(request.getParameter("valor"));
-//            produto.setStatus(request.getParameter("status"));
-//            produto.setLocalArmazenamento(request.getParameter("localArmazenamento"));
-//            produto.setMinimoEstoque(Long.parseLong(request.getParameter("minimoEstoque")));
-//
-            CadastroProdutosDAO dao = new CadastroProdutosDAO();
             
             if(dao.salvar(produto)){
                 response.sendRedirect("pages/dashboard.html");

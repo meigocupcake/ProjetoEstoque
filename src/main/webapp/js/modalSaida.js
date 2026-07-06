@@ -1,14 +1,10 @@
-
 const modalSaida = document.getElementById('modalSaida');
 const btnAbrirSaida = document.getElementById('btnSaida');
 const btnCancelarSaida = document.getElementById('btnCancelarSaida');
 const formSaida = document.getElementById('formSaida');
 
-
 const produtoSaida = document.getElementById('produtoSaida');
 const quantidadeSaida = document.getElementById('quantidadeSaida');
-const loteSaida = document.getElementById('loteSaida');
-
 
 
 btnAbrirSaida.addEventListener('click', () => {
@@ -16,55 +12,61 @@ btnAbrirSaida.addEventListener('click', () => {
 });
 
 
-
 btnCancelarSaida.addEventListener('click', () => {
     fecharModalSaida();
 });
 
 
-
+// Fecha ao clicar fora da caixa
 modalSaida.addEventListener('click', (evento) => {
-
     if (evento.target === modalSaida) {
         fecharModalSaida();
     }
 });
 
 
-
-formSaida.addEventListener('submit', (evento) => {
-
+formSaida.addEventListener('submit', async (evento) => {
     evento.preventDefault();
 
+    const produtoId = produtoSaida.value;
+    const quantidade = parseInt(quantidadeSaida.value, 10);
 
-    const dadosSaida = {
-        produtoId: produtoSaida.value,
-        quantidade: parseInt(quantidadeSaida.value, 10),
-        lote: loteSaida.value.trim()
-    };
-
-
-    if (!validarSaida(dadosSaida)) {
+    if (!validarSaida(produtoId, quantidade)) {
         return;
     }
 
+    try {
+        const resposta = await fetch('http://localhost:8080/operacoes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(
+                {
+                    operacao: 'SAIDA',
+                    quantidade,
+                    idProduto: produtoId,
+                    dataOperacao: new Date().toISOString().split("T")[0]
+                }
+            )
+        });
 
-
-    console.log('Saída registrada:', dadosSaida);
-
-
-
-
-    fecharModalSaida();
-
-
-
-
-    if (typeof carregarEstoque === "function") {
-        carregarEstoque();
+        if (resposta.ok) {
+            fecharModalSaida();
+            if (typeof carregarEstoque === 'function') {
+                carregarEstoque();
+            }
+            if (typeof carregarHistorico === 'function') {
+                carregarHistorico();
+            }
+        } else if (resposta.status === 409) {
+            alert('Estoque insuficiente para essa saída.');
+        } else {
+            alert('Não foi possível registrar a saída.');
+        }
+    } catch (erro) {
+        console.error('Erro ao registrar saída:', erro);
+        alert('Erro de conexão ao registrar a saída.');
     }
 });
-
 
 
 function fecharModalSaida() {
@@ -73,28 +75,14 @@ function fecharModalSaida() {
 }
 
 
-
-function validarSaida(dados) {
-    if (!dados.produtoId) {
+function validarSaida(produtoId, quantidade) {
+    if (!produtoId) {
         alert('Selecione um produto.');
         return false;
     }
-
-    if (isNaN(dados.quantidade) || dados.quantidade <= 0) {
+    if (isNaN(quantidade) || quantidade <= 0) {
         alert('A quantidade deve ser maior que zero.');
         return false;
     }
-
-    if (dados.lote === '') {
-        alert('Informe o lote do produto.');
-        return false;
-    }
-
     return true;
 }
-
-
-
-
-
-

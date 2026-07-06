@@ -1,16 +1,13 @@
 const form = document.getElementById('formCadastroProduto');
 
-// Campos de data (para validar e sincronizar o mínimo do vencimento)
 const inputDataFabricacao = form.querySelector('[name="dataFabricacao"]');
 const inputDataVencimento = form.querySelector('[name="dataVencimento"]');
 
-// Código de barras: permite apenas números (remove qualquer caractere não-dígito)
 const inputCodigoBarras = form.querySelector('[name="codigoBarras"]');
 inputCodigoBarras.addEventListener('input', () => {
     inputCodigoBarras.value = inputCodigoBarras.value.replace(/\D/g, '');
 });
 
-// Data de hoje em "yyyy-mm-dd" (local), usada como limite máximo da fabricação
 function dataHoje() {
     const d = new Date();
     const ano = d.getFullYear();
@@ -19,18 +16,12 @@ function dataHoje() {
     return `${ano}-${mes}-${dia}`;
 }
 
-// A fabricação não pode ser no futuro: o calendário já bloqueia datas posteriores a hoje
 inputDataFabricacao.max = dataHoje();
 
-// Ao escolher a fabricação, o mínimo do vencimento acompanha,
-// impedindo (na interface) escolher uma data anterior.
 inputDataFabricacao.addEventListener('change', () => {
     inputDataVencimento.min = inputDataFabricacao.value;
 });
 
-// Datas obrigatórias e vencimento não anterior à fabricação.
-// Como o <input type="date"> devolve "yyyy-mm-dd" (ISO), a comparação
-// como texto já respeita a ordem cronológica.
 function validarDatas(dataFabricacao, dataVencimento) {
     if (!dataFabricacao || !dataVencimento) {
         alert('Informe a data de fabricação e a data de vencimento.');
@@ -52,16 +43,13 @@ form.addEventListener('submit', async (event) => {
 
     const dados = Object.fromEntries(new FormData(form).entries());
 
-    // Valida as datas antes de enviar
     if (!validarDatas(dados.dataFabricacao, dados.dataVencimento)) {
         return;
     }
 
-    // O modelo Java espera "minimoEstoque" (Long); o input se chama "estoqueMinimo"
     dados.minimoEstoque = Number(dados.estoqueMinimo);
     delete dados.estoqueMinimo;
 
-    // Quantidade inicial do estoque (o back-end usa para iniciar a linha na tabela estoque)
     dados.quantidade = Number(dados.quantidade);
 
     try {

@@ -14,21 +14,51 @@ cancelar.addEventListener('click', () => {
 });
 
 
-form.addEventListener('submit', (evento) => {
+form.addEventListener('submit', async (evento) => {
     evento.preventDefault();
-    const produto = document.getElementById('produto').value;
-    const quantidade = document.getElementById('quantidade').value;
 
-    console.log('Dados salvos:', { produto, quantidade });
+    // O <select> tem id "produtoEntrada" e o value de cada opção é o id do produto
+    const produtoId = document.getElementById('produtoEntrada').value;
+    const quantidade = parseInt(document.getElementById('quantidade').value, 10);
 
+    if (!produtoId) {
+        alert('Selecione um produto.');
+        return;
+    }
+    if (isNaN(quantidade) || quantidade <= 0) {
+        alert('A quantidade deve ser maior que zero.');
+        return;
+    }
 
-    form.reset();
-    modal.close();
+    try {
+        const resposta = await fetch('http://localhost:8080/operacoes', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(
+            {
+                        operacao: 'ENTRADA',
+                        quantidade,
+                        idProduto: produtoId,
+                        dataOperacao: new Date().toISOString().split("T")[0]
+                }
+            )
+        });
 
+        if (resposta.ok) {
+            form.reset();
+            modal.close();
+            if (typeof carregarEstoque === 'function') {
+                carregarEstoque(); // atualiza a coluna Quantidade na tabela
+            }
 
-
-
-    if (typeof carregarEstoque === "function") {
-        carregarEstoque();
+            if (typeof carregarHistorico === 'function') {
+                carregarHistorico();
+            }
+        } else {
+            alert('Não foi possível registrar a entrada.');
+        }
+    } catch (erro) {
+        console.error('Erro ao registrar entrada:', erro);
+        alert('Erro de conexão ao registrar a entrada.');
     }
 });

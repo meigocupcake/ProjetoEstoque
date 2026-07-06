@@ -38,13 +38,13 @@ public class OperacaoDAO {
 
     public List<OperacaoModel> getAll(){
         List<OperacaoModel> lista = new ArrayList<>();
-        StringBuilder sql = new StringBuilder("SELECT * FROM operacoes");
+        // Faz o JOIN para trazer o nome_produto correspondente ao id_produto
+        String sql = "SELECT o.*, p.nome_produto FROM operacoes o " +
+                "LEFT JOIN produtos p ON o.id_produto = p.id";
 
-        try {
-            Connection conn = ConnectionFactory.getConnection();
-            PreparedStatement stmt = conn.prepareStatement(sql.toString());
-
-            ResultSet rs = stmt.executeQuery();
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while(rs.next()){
                 OperacaoModel p = new OperacaoModel();
@@ -52,18 +52,21 @@ public class OperacaoDAO {
                 p.setIdProduto(rs.getInt("id_produto"));
                 p.setOperacao(rs.getString("operacao"));
                 p.setQuantidade(rs.getInt("quantidade"));
-                p.setDataOperacao(rs.getDate("data_operacao").toString());
+
+                if(rs.getDate("data_operacao") != null){
+                    p.setDataOperacao(rs.getDate("data_operacao").toString());
+                }
+
+                // Popula o novo campo com o dado vindo do JOIN
+                p.setNomeProduto(rs.getString("nome_produto"));
 
                 lista.add(p);
             }
-        }catch (Exception e){
+        } catch (Exception e){
             e.printStackTrace();
         }
-
         return lista;
-
     }
-
 
 
 }

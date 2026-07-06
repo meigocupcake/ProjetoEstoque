@@ -6,6 +6,14 @@ public class OperacaoModel {
     private String operacao;
     private int quantidade;
     private String dataOperacao;
+    private String nomeProduto;
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
 
     public int getId() {
         return id;

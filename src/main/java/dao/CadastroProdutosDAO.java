@@ -147,6 +147,44 @@ public class CadastroProdutosDAO {
         return null;
     }
 
+    public List<ProdutoModel> getByBusca(String value){
+            List<ProdutoModel> lista = new ArrayList<>();
+            StringBuilder sql = new StringBuilder("SELECT * FROM produtos WHERE nome_produto LIKE ? OR codigo_barras LIKE ?");
+            String searchValue = "%"+value+"%";
+
+        try(Connection conn = ConnectionFactory.getConnection();
+            PreparedStatement stmt = conn.prepareStatement(sql.toString())){
+            stmt.setString(1, searchValue);
+            stmt.setString(2, searchValue);
+
+            ResultSet rs = stmt.executeQuery();
+            while(rs.next()){
+                ProdutoModel p = new ProdutoModel();
+
+                p.setId(rs.getInt("id"));
+                p.setCodigoBarras(rs.getString("codigo_barras"));
+                p.setNomeProduto(rs.getString("nome_produto"));
+                p.setFabricante(rs.getString("fabricante"));
+                p.setMarca(rs.getString("marca"));
+                p.setValor(rs.getString("valor"));
+                p.setStatus(rs.getString("status"));
+                p.setLocalArmazenamento(rs.getString("local_armazenamento"));
+                p.setMinimoEstoque(rs.getLong("minimo_estoque"));
+                p.setDataVencimento(rs.getDate("data_vencimento").toString());
+                p.setDataFabricacao(rs.getDate("data_fabricacao").toString());
+                p.setQuantidade(rs.getInt("quantidade"));
+
+                lista.add(p);
+            }
+
+        }catch(SQLException e){
+            e.printStackTrace();
+
+        }
+
+        return lista;
+    }
+
     public List<ProdutoModel> getAll(){
         List<ProdutoModel> lista = new ArrayList<>();
         StringBuilder sql = new StringBuilder("SELECT * FROM produtos");

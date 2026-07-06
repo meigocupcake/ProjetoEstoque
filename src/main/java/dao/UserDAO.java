@@ -20,8 +20,6 @@ public class UserDAO {
             
             ResultSet rs = stmt.executeQuery();
 
-            
-            
             if(rs.next()){
                 String hashBanco = rs.getString("psw");
                 boolean senhaValida = SenhaUtil.verificarSenha(

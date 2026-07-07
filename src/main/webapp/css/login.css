@@ -4,14 +4,11 @@
     --verde-medio:   #A5C3A780;
     --verde-forte:   #A5C3A7;
 
-
     --laranja-medio: #D9A05B80;
     --laranja-forte: #D9A05B;
 
-
     --vermelho-medio: #B85C5C80;
     --vermelho-forte: #B85C5C;
-
 
     --branco:        #FFFFFF;
     --cinza-texto:   #4a4a4a;
@@ -25,10 +22,8 @@
     --espaco-m:  16px;
     --espaco-g:  24px;
 
-
     --raio-pequeno: 6px;
     --raio-medio:   10px;
-
 
     --sombra: 0 2px 8px rgba(0, 0, 0, 0.08);
 }

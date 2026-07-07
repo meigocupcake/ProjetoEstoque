@@ -66,6 +66,6 @@ CREATE TABLE operacoes
     data_operacao DATE,
     CONSTRAINT fk_operacao_produto
         FOREIGN KEY (id_produto) REFERENCES produtos (id)
-            ON DELETE SET NULL ON UPDATE CASCADE
+            ON DELETE CASCADE ON UPDATE CASCADE
 );
 

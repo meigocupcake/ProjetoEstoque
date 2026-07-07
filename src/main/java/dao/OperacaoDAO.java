@@ -38,7 +38,7 @@ public class OperacaoDAO {
 
     public List<OperacaoModel> getAll(){
         List<OperacaoModel> lista = new ArrayList<>();
-        // Faz o JOIN para trazer o nome_produto correspondente ao id_produto
+
         String sql = "SELECT o.*, p.nome_produto FROM operacoes o " +
                 "LEFT JOIN produtos p ON o.id_produto = p.id";
 
@@ -57,7 +57,6 @@ public class OperacaoDAO {
                     p.setDataOperacao(rs.getDate("data_operacao").toString());
                 }
 
-                // Popula o novo campo com o dado vindo do JOIN
                 p.setNomeProduto(rs.getString("nome_produto"));
 
                 lista.add(p);

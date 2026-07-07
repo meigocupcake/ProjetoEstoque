@@ -1,49 +1,39 @@
-/* ============================================
-   CADASTRO DE PERFIL - SISTEMA DE ESTOQUE
-   Mesma identidade visual do dashboard.css
-   ============================================ */
-
-/* --------------------------------------------
-   VARIÁVEIS DE COR (iguais ao dashboard)
-   -------------------------------------------- */
 :root {
-    /* Verde sage - cor base do sistema */
-    --verde-claro:   #A5C3A760;  /* 60% opacidade - fundos suaves */
-    --verde-medio:   #A5C3A780;  /* 80% opacidade - estados normais */
-    --verde-forte:   #A5C3A7;    /* 100% - estados hover */
 
-    /* Laranja - operações de ENTRADA */
+    --verde-claro:   #A5C3A760;
+    --verde-medio:   #A5C3A780;
+    --verde-forte:   #A5C3A7;
+
+
     --laranja-medio: #D9A05B80;
     --laranja-forte: #D9A05B;
 
-    /* Vermelho - operações de SAÍDA */
+
     --vermelho-medio: #B85C5C80;
     --vermelho-forte: #B85C5C;
 
-    /* Neutros */
+
     --branco:        #FFFFFF;
     --cinza-texto:   #4a4a4a;
     --cinza-claro:   #f5f5f5;
     --cinza-placeholder: #808080;
     --escuro:        #2a2a2a;
 
-    /* Espaçamentos consistentes */
+
     --espaco-pp: 8px;
     --espaco-p:  12px;
     --espaco-m:  16px;
     --espaco-g:  24px;
 
-    /* Raios de borda */
+
     --raio-pequeno: 6px;
     --raio-medio:   10px;
 
-    /* Sombra padrão */
+
     --sombra: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-/* --------------------------------------------
-   RESET BÁSICO
-   -------------------------------------------- */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -60,9 +50,7 @@ ul {
     list-style: none;
 }
 
-/* --------------------------------------------
-   LAYOUT GERAL
-   -------------------------------------------- */
+
 .pagina {
     display: flex;
     width: 100vw;
@@ -71,9 +59,7 @@ ul {
     gap: var(--espaco-pp);
 }
 
-/* --------------------------------------------
-   MENU LATERAL (idêntico ao dashboard)
-   -------------------------------------------- */
+
 .menu {
     display: flex;
     flex-direction: column;
@@ -87,7 +73,7 @@ ul {
     flex-shrink: 0;
 }
 
-/* --- Cartão do perfil --- */
+
 .perfil {
     display: flex;
     align-items: center;
@@ -138,7 +124,6 @@ ul {
     text-decoration: underline;
 }
 
-/* --- Lista de navegação --- */
 .listaMenu {
     display: flex;
     flex-direction: column;
@@ -152,14 +137,13 @@ ul {
     cursor: pointer;
     text-align: center;
     transition: background-color 0.3s ease;
-    overflow: hidden;          /* mantém os cantos arredondados no link */
+    overflow: hidden;
 }
 
 .listaMenu li:hover {
     background-color: var(--verde-forte);
 }
 
-/* Itens com link: o <a> preenche todo o botão e fica clicável por inteiro */
 .listaMenu li a {
     display: block;
     margin: calc(-1 * var(--espaco-p)) calc(-1 * var(--espaco-m));
@@ -168,9 +152,6 @@ ul {
     text-decoration: none;
 }
 
-/* --------------------------------------------
-   ÁREA DE CONTEÚDO PRINCIPAL
-   -------------------------------------------- */
 .conteudo {
     display: flex;
     flex-direction: column;
@@ -189,16 +170,12 @@ ul {
     font-weight: 600;
 }
 
-/* --------------------------------------------
-   FORMULÁRIO
-   -------------------------------------------- */
 form {
     display: flex;
     flex-direction: column;
     gap: var(--espaco-g);
 }
 
-/* Duas colunas: dados pessoais + endereço */
 .container {
     display: flex;
     flex-wrap: wrap;
@@ -225,7 +202,6 @@ form {
     margin-bottom: var(--espaco-pp);
 }
 
-/* Rótulos */
 form label,
 form p {
     font-size: 0.85rem;
@@ -234,7 +210,7 @@ form p {
     margin-top: var(--espaco-pp);
 }
 
-/* Campos de entrada */
+
 form input,
 form select {
     width: 100%;
@@ -258,14 +234,11 @@ form select:focus {
     opacity: 1;
 }
 
-/* --------------------------------------------
-   BOTÃO DE ENVIO
-   -------------------------------------------- */
 .btn {
     display: flex;
-    justify-content: flex-end;   /* botões à direita */
+    justify-content: flex-end;
     gap: var(--espaco-p);
-    margin-top: auto;            /* empurra para o fundo do conteinerEndereco */
+    margin-top: auto;
 }
 
 .btnCancelar,
@@ -292,12 +265,12 @@ form select:focus {
 }
 
 .btnCancelar {
-    background-color: #E2E2E2;   /* fundo levemente cinza, como o Cancelar do dashboard */
+    background-color: #E2E2E2;
     color: var(--cinza-texto);
 }
 
 .btnCancelar:hover {
-    background-color: #D4D4D4;   /* leve escurecimento no hover */
+    background-color: #D4D4D4;
 }
 
 .btnCancelar:active,

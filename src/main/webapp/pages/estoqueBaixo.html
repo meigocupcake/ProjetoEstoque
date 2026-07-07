@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <link rel="stylesheet" href="../css/estoqueBaixo.css" />
+  <title>Estoque baixo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+<div class="pagina">
+
+  <aside class="menu">
+    <div class="perfil">
+      <div id="fotoPerfil" class="fotoPerfil"></div>
+      <ul class="perfilCartao">
+        <li id="nomeUsuario"></li>
+        <li id="cargoUsuario"></li>
+        <li>
+          <button id="btnLogout" class="botaoLogout">Sair</button>
+        </li>
+      </ul>
+    </div>
+    <ul class="listaMenu">
+      <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="estoqueBaixo.html">Produtos Para Repor</a></li>
+      <li><a href="cadastroProdutos.html">Cadastrar Produto</a></li>
+      <li><a href="cadastro.html">Cadastrar Perfil</a></li>
+    </ul>
+  </aside>
+
+  <main class="conteudo">
+
+    <div class="filtros">
+      <button type="button" id="btnAbaixo" class="botaoAbaixo ativo">Produtos abaixo da quantidade mínima</button>
+      <button type="button" id="btnProximo" class="botaoProximo">Produtos próximos da quantidade mínima</button>
+    </div>
+
+    <div class="tabela" id="tabelaProdutos">
+      <table>
+        <thead>
+        <tr>
+          <th>Código de barras</th>
+          <th>Nome</th>
+          <th>Quantidade</th>
+          <th>Valor</th>
+          <th>Fabricante</th>
+          <th>Marca</th>
+          <th>Local de Armazenamento</th>
+          <th>Estoque mínimo</th>
+          <th>Status</th>
+          <th>Data de Fabricação</th>
+          <th>Data de Vencimento</th>
+        </tr>
+        </thead>
+        <tbody id="corpoTabela">
+        </tbody>
+      </table>
+    </div>
+
+  </main>
+</div>
+<script src="../js/estoqueBaixo.js"></script>
+<script src="../js/logout.js"></script>
+<script src="../js/validarLogin.js"></script>
+</body>
+</html>

@@ -45,7 +45,6 @@ public class CadastroProdutoController extends HttpServlet{
 
         int id = Integer.parseInt(request.getPathInfo().substring(1));
 
-
         ProdutoModel produto = dao.getById(id);
         if(produto == null){
             response.sendError(HttpServletResponse.SC_NOT_FOUND, "Produto não encontrado");
@@ -101,9 +100,6 @@ public class CadastroProdutoController extends HttpServlet{
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "ID inválido");
         }
-
-
-
     }
 
     public void doDelete(HttpServletRequest request, HttpServletResponse response)

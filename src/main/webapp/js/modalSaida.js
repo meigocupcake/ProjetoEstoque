@@ -6,7 +6,6 @@ const formSaida = document.getElementById('formSaida');
 const produtoSaida = document.getElementById('produtoSaida');
 const quantidadeSaida = document.getElementById('quantidadeSaida');
 
-
 btnAbrirSaida.addEventListener('click', () => {
     modalSaida.showModal();
 });
@@ -17,13 +16,12 @@ btnCancelarSaida.addEventListener('click', () => {
 });
 
 
-// Fecha ao clicar fora da caixa
+
 modalSaida.addEventListener('click', (evento) => {
     if (evento.target === modalSaida) {
         fecharModalSaida();
     }
 });
-
 
 formSaida.addEventListener('submit', async (evento) => {
     evento.preventDefault();
@@ -50,6 +48,7 @@ formSaida.addEventListener('submit', async (evento) => {
         });
 
         if (resposta.ok) {
+            alert('Saída registrada com sucesso.')
             fecharModalSaida();
             if (typeof carregarEstoque === 'function') {
                 carregarEstoque();

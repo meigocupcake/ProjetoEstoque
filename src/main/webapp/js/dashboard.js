@@ -8,6 +8,28 @@ function dataHoje() {
     return `${ano}-${mes}-${dia}`;
 }
 
+function debounce(func, delay) {
+    let timeoutId;
+
+    return function(...args) {
+        const context = this;
+
+        clearTimeout(timeoutId);
+
+        timeoutId = setTimeout(() => {
+            func.apply(context, args);
+        }, delay);
+    };
+}
+
+function corLinha(val, base) {
+    val = Number(val);
+    base = Number(base);
+    if (val <= base)     return "fundoRepor";
+    if (val <= base + 3) return "fundoAtencao";
+    return "fundoPadrao";
+}
+
 function validarDatas(dataFabricacao, dataVencimento) {
     if (!dataFabricacao || !dataVencimento) {
         alert("Informe a data de fabricação e a data de vencimento.");
@@ -41,7 +63,7 @@ async function carregarEstoque(){
 
         dados.forEach(item =>{
             const linha = `
-                   <tr>
+                   <tr class="${corLinha(item.quantidade, item.minimoEstoque)}">
                        <td>${item.codigoBarras}</td>
                        <td>${item.nomeProduto}</td>
                        <td>${item.quantidade ?? "-"}</td>
@@ -311,7 +333,47 @@ async function configurarHistorico(){
     });
 }
 
+const pesquisa = async (valorInput) => {
+    const response = await fetch(`http://localhost:8080/produtos?busca=${valorInput}`)
+    const dados = await response.json()
+    const tabela = document.getElementById("corpoTabela");
+    tabela.innerHTML = "";
 
+    dados.forEach(item =>{
+        const linha = `
+                   <tr class="${corLinha(item.quantidade, item.minimoEstoque)}">
+                       <td>${item.codigoBarras}</td>
+                       <td>${item.nomeProduto}</td>
+                       <td>${item.quantidade ?? "-"}</td>
+                       <td>R$ ${item.valor}</td>
+                       <td>${item.fabricante}</td>
+                       <td>${item.marca}</td>
+                       <td>${item.localArmazenamento}</td>
+                       <td>${item.minimoEstoque}</td>
+                       <td>${item.status}</td>
+                       <td>${item.dataFabricacao}</td>
+                       <td>${item.dataVencimento}</td>
+                       <td class="acoesTabela">
+                           <button type="button" class="btnAcao btnEditar" title="Editar" data-codigo="${item.id}">
+                               <img src="../img/editar.png" alt="Editar" />
+                           </button>
+                           <button type="button" class="btnAcao btnExcluir" title="Excluir" data-codigo="${item.id}">
+                               <img src="../img/excluir.png" alt="Excluir" />
+                           </button>
+                       </td>
+                   </tr>
+                   `;
+        tabela.innerHTML += linha;
+    });
+}
+
+const pesquisaDebounced = debounce(pesquisa, 200);
+
+const input = document.getElementById("pesquisa");
+input.addEventListener("change", async (e) => {
+    const valorInput = e.target.value;
+    pesquisaDebounced(valorInput);
+});
 
 
 window.onload = () => {

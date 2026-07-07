@@ -39,6 +39,10 @@ public class OperacaoController extends HttpServlet {
         if(tipo.equals("ENTRADA")){
             quantidade += operacao.getQuantidade();
         }else{
+            if(operacao.getQuantidade() > produto.getQuantidade()){
+                response.sendError(HttpServletResponse.SC_CONFLICT, "Estoque insuficiente para esta saída.");
+                return;
+            }
             quantidade -= operacao.getQuantidade();
         }
 

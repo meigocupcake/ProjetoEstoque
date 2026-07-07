@@ -12,13 +12,12 @@
 <body>
 <div class="pagina">
 
-  <!-- MENU LATERAL -->
   <aside class="menu">
     <div class="perfil">
-      <div class="fotoPerfil">Foto</div>
+      <div id="fotoPerfil" class="fotoPerfil"></div>
       <ul class="perfilCartao">
-        <li>Nome</li>
-        <li>Cargo</li>
+        <li id="nomeUsuario"></li>
+        <li id="cargoUsuario"></li>
         <li>
           <button id="btnLogout" class="botaoLogout">Sair</button>
         </li>
@@ -27,10 +26,9 @@
 
     <ul class="listaMenu">
       <li><a href="dashboard.html">Dashboard</a></li>
+      <li><a href="estoqueBaixo.html">Produtos Para Repor</a></li>
       <li><a href="cadastroProdutos.html">Cadastrar Produto</a></li>
       <li><a href="cadastro.html">Cadastrar Perfil</a></li>
-      <li>Gerenciar Produtos</li>
-      <li>Gerenciar Operações</li>
     </ul>
   </aside>
 
@@ -42,7 +40,6 @@
       <button id="btnAuditoria" class="botaoAuditoria">Histórico</button>
     </div>
 
-    <!-- MODAL DE ENTRADA -->
     <dialog id="modalEntrada">
       <h2>Nova entrada</h2>
       <form id="formEntrada">
@@ -177,7 +174,7 @@
     </dialog>
 
     <div class="busca">
-      <input type="search" placeholder="Pesquisar produtos...">
+      <input id="pesquisa" type="search" placeholder="Pesquisar produtos...">
     </div>
 
     <div class="tabela" id="tabelaProdutos">
@@ -203,7 +200,6 @@
       </table>
     </div>
 
-    <!-- TABELA DE HISTÓRICO (mostrada ao clicar em "Histórico") -->
     <div class="tabela tabelaHistorico" id="tabelaHistorico" hidden>
       <table>
         <thead>
@@ -215,7 +211,6 @@
         </tr>
         </thead>
         <tbody id="corpoHistorico">
-        <!-- Sem dados: será preenchido futuramente -->
         <tr class="linhaVazia">
           <td colspan="4">Nenhum registro para exibir.</td>
         </tr>
@@ -228,5 +223,8 @@
 <script src="../js/modalEntrada.js"></script>
 <script src="../js/modalSaida.js"></script>
 <script src="../js/dashboard.js"></script>
+<script src="../js/logout.js"></script>
+<script src="../js/validarLogin.js"></script>
+
 </body>
 </html>

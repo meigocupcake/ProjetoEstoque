@@ -9,13 +9,12 @@
     <body>
         <div class="pagina">
 
-            <!-- MENU LATERAL -->
             <aside class="menu">
                 <div class="perfil">
-                    <div class="fotoPerfil">Foto</div>
+                    <div id="fotoPerfil" class="fotoPerfil"></div>
                     <ul class="perfilCartao">
-                        <li>Nome</li>
-                        <li>Cargo</li>
+                        <li id="nomeUsuario"></li>
+                        <li id="cargoUsuario"></li>
                         <li>
                             <button id="btnLogout" class="botaoLogout">Sair</button>
                         </li>
@@ -24,14 +23,12 @@
 
                 <ul class="listaMenu">
                     <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="estoqueBaixo.html">Produtos Para Repor</a></li>
                     <li><a href="cadastroProdutos.html">Cadastrar Produto</a></li>
                     <li><a href="cadastro.html">Cadastrar Perfil</a></li>
-                    <li>Gerenciar Produtos</li>
-                    <li>Gerenciar Operações</li>
                 </ul>
             </aside>
 
-            <!-- CONTEÚDO PRINCIPAL -->
             <main class="conteudo">
                 <h1 class="tituloPagina">Cadastro de Produto</h1>
 
@@ -88,12 +85,6 @@
                                 <input type="number" name="valor" id="valorUnitario" min="0" step="0.01" required />
                             </div>
                             <div class="grupo-form">
-                                <label>Quantidade inicial</label>
-                                <input type="number" name="quantidade" id="quantidade" min="1" required />
-                            </div>
-                        </div>
-                        <div class="linha-form">
-                            <div class="grupo-form">
                                 <label>Quantidade mínima de estoque</label>
                                 <input type="number" name="estoqueMinimo" id="estoqueMinimo" min="1" required />
                             </div>
@@ -108,5 +99,7 @@
 
         </div>
         <script src="../js/cadastroProdutos.js" defer></script>
+        <script src="../js/logout.js"></script>
+        <script src="../js/validarLogin.js"></script>
     </body>
 </html>

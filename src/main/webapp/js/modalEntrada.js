@@ -13,11 +13,10 @@ cancelar.addEventListener('click', () => {
     modal.close();
 });
 
-
 form.addEventListener('submit', async (evento) => {
     evento.preventDefault();
 
-    // O <select> tem id "produtoEntrada" e o value de cada opção é o id do produto
+
     const produtoId = document.getElementById('produtoEntrada').value;
     const quantidade = parseInt(document.getElementById('quantidade').value, 10);
 
@@ -45,10 +44,11 @@ form.addEventListener('submit', async (evento) => {
         });
 
         if (resposta.ok) {
+            alert('Entrada registrada com sucesso.')
             form.reset();
             modal.close();
             if (typeof carregarEstoque === 'function') {
-                carregarEstoque(); // atualiza a coluna Quantidade na tabela
+                carregarEstoque();
             }
 
             if (typeof carregarHistorico === 'function') {

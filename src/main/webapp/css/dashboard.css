@@ -250,6 +250,10 @@ ul {
     transition: border-color 0.3s ease;
 }
 
+.busca[hidden] {
+    display: none;
+}
+
 .busca:focus-within {
     border-color: var(--verde-forte);
 }
@@ -381,4 +385,8 @@ ul {
 
 .tabelaHistorico .linhaVazia:hover {
     background-color: transparent;
+}
+
+.hidden{
+    display: none;
 }

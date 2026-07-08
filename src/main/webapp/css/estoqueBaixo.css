@@ -14,6 +14,10 @@
     --amarelo-medio:  #D9A05B80;
     --amarelo-forte:  #D9A05B;
 
+    --azul-claro:  #6E8CB840;
+    --azul-medio:  #6E8CB880;
+    --azul-forte:  #6E8CB8;
+
 
     --branco:            #FFFFFF;
     --cinza-texto:       #4a4a4a;
@@ -174,11 +178,11 @@ ul {
 
 .filtros {
     display: flex;
-    flex-wrap: wrap;
     gap: var(--espaco-p);
 }
 
 .filtros button {
+    flex: 1;
     padding: var(--espaco-p) var(--espaco-m);
     border: none;
     border-radius: var(--raio-medio);
@@ -208,6 +212,47 @@ ul {
 .botaoProximo.ativo {
     background-color: var(--amarelo-forte);
     color: var(--branco);
+}
+
+
+.botaoTodos {
+    background-color: var(--azul-medio);
+}
+
+.botaoTodos:hover,
+.botaoTodos.ativo {
+    background-color: var(--azul-forte);
+    color: var(--branco);
+}
+
+
+.busca {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: var(--espaco-p) var(--espaco-m);
+    background-color: var(--branco);
+    border: 1px solid var(--verde-medio);
+    border-radius: var(--raio-medio);
+    transition: border-color 0.3s ease;
+}
+
+.busca:focus-within {
+    border-color: var(--verde-forte);
+}
+
+.busca input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 0.95rem;
+    color: var(--cinza-texto);
+}
+
+
+.btnReativar:hover {
+    background-color: var(--verde-medio);
 }
 
 .tabela {
@@ -262,6 +307,66 @@ ul {
     background-color: var(--amarelo-claro);
 }
 
+
+.tabela.temaAzul {
+    border-color: var(--azul-medio);
+}
+
+.tabela.temaAzul th {
+    background-color: var(--azul-forte);
+}
+
+.tabela.temaAzul td {
+    border-top-color: var(--azul-claro);
+}
+
+.tabela.temaAzul tbody tr:hover {
+    background-color: var(--azul-claro);
+}
+
+
+.tabela td.acoesTabela {
+    white-space: nowrap;
+}
+
+.btnAcao {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 6px;
+    border: none;
+    border-radius: var(--raio-pequeno);
+    background-color: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btnAcao + .btnAcao {
+    margin-left: var(--espaco-pp);
+}
+
+.btnAcao img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.btnEditar:hover {
+    background-color: var(--verde-medio);
+}
+
+.btnExcluir:hover {
+    background-color: var(--vermelho-medio);
+}
+
+.btnAcao:active {
+    transform: scale(0.92);
+}
+
 .linhaVazia td {
     text-align: center;
     color: var(--cinza-placeholder);
@@ -270,4 +375,88 @@ ul {
 
 .tabela tbody tr.linhaVazia:hover {
     background-color: transparent;
+}
+
+
+#modalReativar {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+    width: 440px;
+    max-width: 92vw;
+    padding: var(--espaco-g);
+    border: none;
+    border-radius: var(--raio-medio);
+    box-shadow: var(--sombra);
+    color: var(--cinza-texto);
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+#modalReativar::backdrop {
+    background-color: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(4px);
+}
+
+#modalReativar h2 {
+    margin-bottom: var(--espaco-m);
+    color: var(--azul-forte);
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+#textoReativar {
+    margin-bottom: var(--espaco-g);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+#textoReativar strong {
+    color: var(--escuro);
+}
+
+#modalReativar .acoes {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--espaco-p);
+    margin-top: var(--espaco-m);
+}
+
+#modalReativar .acoes button {
+    padding: var(--espaco-p) var(--espaco-g);
+    border: none;
+    border-radius: var(--raio-medio);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+}
+
+#modalReativar .acoes button:active {
+    transform: scale(0.98);
+}
+
+#btnCancelarReativar {
+    background-color: var(--branco);
+    color: var(--cinza-texto);
+    border: 1px solid var(--azul-medio);
+}
+
+#btnCancelarReativar:hover {
+    background-color: var(--azul-claro);
+}
+
+.btnAzul {
+    background-color: var(--azul-medio);
+    color: var(--cinza-texto);
+}
+
+.btnAzul:hover {
+    background-color: var(--azul-forte);
+    color: var(--branco);
+}
+
+.hidden{
+    display: none;
 }

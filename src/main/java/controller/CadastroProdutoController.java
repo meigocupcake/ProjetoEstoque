@@ -123,11 +123,22 @@ public class CadastroProdutoController extends HttpServlet{
 
           System.out.println("id: " + id);
 
+            if(produto.getStatus().equalsIgnoreCase("Ativo")){
+                if (dao.inativar(id)) {
+                    response.setStatus(HttpServletResponse.SC_OK);
+                }else{
+                    response.setStatus((HttpServletResponse.SC_BAD_GATEWAY));
+                }
+                return;
+            }
+
             if (dao.deletar(id)) {
                 response.setStatus(HttpServletResponse.SC_OK);
             }else{
                 response.setStatus((HttpServletResponse.SC_BAD_GATEWAY));
             }
+
+
 
         }catch(Exception e){
 

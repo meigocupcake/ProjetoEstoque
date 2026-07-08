@@ -91,6 +91,29 @@ public class CadastroProdutosDAO {
 
     }
 
+    public boolean inativar(int id){
+        String sql = "UPDATE produtos SET status = 'Inativo' WHERE id = ?";
+
+        System.out.println(sql);
+
+        try (Connection conn = ConnectionFactory.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)
+        ) {
+
+            stmt.setInt(1, id);
+            System.out.println(stmt.toString());
+
+            stmt.executeUpdate();
+
+            return true;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+
     public boolean deletar(int id) {
         String sql = "DELETE FROM produtos WHERE id = ?";
 

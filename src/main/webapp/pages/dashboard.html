@@ -26,7 +26,7 @@
 
     <ul class="listaMenu">
       <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="estoqueBaixo.html">Produtos Para Repor</a></li>
+      <li><a href="estoqueBaixo.html">Gerenciar Produtos</a></li>
       <li><a href="cadastroProdutos.html">Cadastrar Produto</a></li>
       <li><a href="cadastro.html">Cadastrar Perfil</a></li>
     </ul>
@@ -131,7 +131,7 @@
         </div>
 
         <div class="linhaCampos">
-          <div class="campo">
+          <div class="hidden">
             <label for="editarStatus">Status:</label>
             <select id="editarStatus" name="status" required>
               <option value="" disabled hidden>Selecione o status</option>
@@ -166,10 +166,10 @@
     <dialog id="modalExcluir">
       <input type="hidden" id="excluirId" name="idProduto" />
       <h2>Excluir produto</h2>
-      <p id="textoExcluir">Tem certeza que deseja excluir este produto?</p>
+      <p id="textoExcluir">Tem certeza que deseja remover este produto?</p>
       <div class="acoes">
         <button type="button" id="btnCancelarExcluir">Cancelar</button>
-        <button type="button" id="btnConfirmarExcluir" class="btnPerigo">Excluir</button>
+        <button type="button" id="btnConfirmarExcluir" class="btnPerigo">Remover</button>
       </div>
     </dialog>
 
@@ -189,7 +189,6 @@
           <th>Marca</th>
           <th>Local de Armazenamento</th>
           <th>Estoque minímo</th>
-          <th>Status</th>
           <th>Data de Fabricação</th>
           <th>Data de Vencimento</th>
           <th>Ações</th>

@@ -2,6 +2,7 @@
 <html lang="pt-BR">
 <head>
   <link rel="stylesheet" href="../css/estoqueBaixo.css" />
+  <link rel="stylesheet" href="../css/modalAcoes.css" />
   <title>Estoque baixo</title>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -22,7 +23,7 @@
     </div>
     <ul class="listaMenu">
       <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="estoqueBaixo.html">Produtos Para Repor</a></li>
+      <li><a href="estoqueBaixo.html">Gerenciar Produtos</a></li>
       <li><a href="cadastroProdutos.html">Cadastrar Produto</a></li>
       <li><a href="cadastro.html">Cadastrar Perfil</a></li>
     </ul>
@@ -33,6 +34,11 @@
     <div class="filtros">
       <button type="button" id="btnAbaixo" class="botaoAbaixo ativo">Produtos abaixo da quantidade mínima</button>
       <button type="button" id="btnProximo" class="botaoProximo">Produtos próximos da quantidade mínima</button>
+      <button type="button" id="btnTodos" class="botaoTodos">Produtos inativos</button>
+    </div>
+
+    <div class="busca">
+      <input id="pesquisa" type="search" placeholder="Pesquisar produtos...">
     </div>
 
     <div class="tabela" id="tabelaProdutos">
@@ -47,7 +53,6 @@
           <th>Marca</th>
           <th>Local de Armazenamento</th>
           <th>Estoque mínimo</th>
-          <th>Status</th>
           <th>Data de Fabricação</th>
           <th>Data de Vencimento</th>
         </tr>
@@ -56,6 +61,96 @@
         </tbody>
       </table>
     </div>
+
+    <dialog id="modalEditar">
+      <h2>Editar produto</h2>
+      <form id="formEditar">
+        <input type="hidden" id="editarId" name="idProduto" />
+
+        <div class="campo">
+          <label for="editarCodigoBarras">Código de barras:</label>
+          <input type="text" id="editarCodigoBarras" name="codigoBarras" inputmode="numeric" pattern="[0-9]+" title="Apenas números" required>
+        </div>
+
+        <div class="campo">
+          <label for="editarNome">Nome do produto:</label>
+          <input type="text" id="editarNome" name="nomeProduto" required>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarFabricante">Fabricante:</label>
+            <input type="text" id="editarFabricante" name="fabricante" required>
+          </div>
+          <div class="campo">
+            <label for="editarMarca">Marca:</label>
+            <input type="text" id="editarMarca" name="marca" required>
+          </div>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarValor">Valor:</label>
+            <input type="number" id="editarValor" name="valor" min="0" step="0.01" required>
+          </div>
+          <div class="campo">
+            <label for="editarLocal">Local de Armazenamento:</label>
+            <input type="text" id="editarLocal" name="localArmazenamento" required>
+          </div>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="hidden">
+            <label for="editarStatus">Status:</label>
+            <select id="editarStatus" name="status" required>
+              <option value="" disabled hidden>Selecione o status</option>
+              <option value="Ativo">Ativo</option>
+              <option value="Inativo">Inativo</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="editarEstoqueMinimo">Quantidade mínima de estoque:</label>
+            <input type="number" id="editarEstoqueMinimo" name="minimoEstoque" min="1" required>
+          </div>
+        </div>
+
+        <div class="linhaCampos">
+          <div class="campo">
+            <label for="editarDataFabricacao">Data de fabricação:</label>
+            <input type="date" id="editarDataFabricacao" name="dataFabricacao" required>
+          </div>
+          <div class="campo">
+            <label for="editarDataVencimento">Data de vencimento:</label>
+            <input type="date" id="editarDataVencimento" name="dataVencimento" required>
+          </div>
+        </div>
+
+        <div class="acoes">
+          <button type="button" id="btnCancelarEditar">Cancelar</button>
+          <button type="submit">Salvar</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="modalExcluir">
+      <input type="hidden" id="excluirId" name="idProduto" />
+      <h2>Excluir produto</h2>
+      <p id="textoExcluir">Tem certeza que deseja excluir este produto?</p>
+      <div class="acoes">
+        <button type="button" id="btnCancelarExcluir">Cancelar</button>
+        <button type="button" id="btnConfirmarExcluir" class="btnPerigo">Excluir</button>
+      </div>
+    </dialog>
+
+    <dialog id="modalReativar">
+      <input type="hidden" id="reativarId" name="idProduto" />
+      <h2>Reativar produto</h2>
+      <p id="textoReativar">Deseja reativar este produto?</p>
+      <div class="acoes">
+        <button type="button" id="btnCancelarReativar">Cancelar</button>
+        <button type="button" id="btnConfirmarReativar" class="btnAzul">Reativar</button>
+      </div>
+    </dialog>
 
   </main>
 </div>

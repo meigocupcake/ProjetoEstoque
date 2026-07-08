@@ -52,48 +52,29 @@ async function carregarEstoque(){
         const dados = await response.json();
         produtosCarregados = dados;
 
-        const tabela = document.getElementById("corpoTabela");
-        tabela.innerHTML = "";
-
         const selectProdutoEntrada = document.getElementById("produtoEntrada");
         selectProdutoEntrada.innerHTML = '<option value="">-- Escolha um produto --</option>';
 
         const selectProdutoSaida = document.getElementById("produtoSaida");
         selectProdutoSaida.innerHTML = '<option value="">-- Escolha um produto --</option>';
 
-        dados.forEach(item =>{
-            const linha = `
-                   <tr class="${corLinha(item.quantidade, item.minimoEstoque)}">
-                       <td>${item.codigoBarras}</td>
-                       <td>${item.nomeProduto}</td>
-                       <td>${item.quantidade ?? "-"}</td>
-                       <td>R$ ${item.valor}</td>
-                       <td>${item.fabricante}</td>
-                       <td>${item.marca}</td>
-                       <td>${item.localArmazenamento}</td>
-                       <td>${item.minimoEstoque}</td>
-                       <td>${item.status}</td>
-                       <td>${item.dataFabricacao}</td>
-                       <td>${item.dataVencimento}</td>
-                       <td class="acoesTabela">
-                           <button type="button" class="btnAcao btnEditar" title="Editar" data-codigo="${item.id}">
-                               <img src="../img/editar.png" alt="Editar" />
-                           </button>
-                           <button type="button" class="btnAcao btnExcluir" title="Excluir" data-codigo="${item.id}">
-                               <img src="../img/excluir.png" alt="Excluir" />
-                           </button>
-                       </td>
-                   </tr>
-                   `;
+        const ativos = dados.filter(p => p.status.toUpperCase() === "ATIVO");
+
+        ativos.forEach(item => {
             const option = document.createElement("option");
             option.value = item.id;
             option.textContent = item.nomeProduto;
             const optionSaida = option.cloneNode(true);
             selectProdutoEntrada.appendChild(option);
             selectProdutoSaida.appendChild(optionSaida);
-            tabela.innerHTML += linha;
         });
 
+        const campoPesquisa = document.getElementById("pesquisa");
+        if (campoPesquisa && campoPesquisa.value.trim()) {
+            pesquisa(campoPesquisa.value);
+        } else {
+            renderizarTabela(ativos);
+        }
 
     }catch(erro){
         console.log("Erro ao carregar os produtos", erro);
@@ -209,7 +190,7 @@ function excluirProduto(codigo){
 
     document.getElementById("excluirId").value = produto.id;
     document.getElementById("textoExcluir").innerHTML =
-        `Tem certeza que deseja excluir <strong>${produto.nomeProduto}</strong>? Essa ação não pode ser desfeita.`;
+        `Tem certeza que deseja remover <strong>${produto.nomeProduto}</strong>? O produto ficará inativo.`;
 
     document.getElementById("modalExcluir").showModal();
 }
@@ -243,18 +224,20 @@ function configurarModalExcluir(){
             });
 
             if (response.ok) {
+                alert('Produto removido com sucesso.')
                 modal.close();
                 carregarEstoque();
                 carregarHistorico();
 
+
             } else {
-                console.log("Não foi possível excluir o produto", response.status);
+                console.log("Não foi possível remover o produto", response.status);
             }
         }catch(erro){
-            console.log("Erro ao excluir o produto", erro);
+            console.log("Erro ao remover o produto", erro);
         }finally {
             botao.disabled = false;
-            botao.innerText = "Excluir";
+            botao.innerText = "Remover";
         }
     });
 }
@@ -292,7 +275,7 @@ async function configurarHistorico(){
         const mostrandoHistorico = botao.classList.toggle("ativo");
 
         if (mostrandoHistorico) {
-            botao.textContent = "Dashboard";
+            botao.textContent = "Produtos Ativos";
             tabelaProdutos.hidden  = true;
             tabelaHistorico.hidden = false;
             if (busca) busca.hidden = true;
@@ -307,14 +290,22 @@ async function configurarHistorico(){
     });
 }
 
-const pesquisa = async (valorInput) => {
-    const response = await fetch(`http://localhost:8080/produtos?busca=${valorInput}`)
-    const dados = await response.json()
-    const tabela = document.getElementById("corpoTabela");
-    tabela.innerHTML = "";
+function normalizar(texto) {
+    return String(texto ?? "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .toLowerCase();
+}
 
-    dados.forEach(item =>{
-        const linha = `
+function renderizarTabela(dados) {
+    const tabela = document.getElementById("corpoTabela");
+
+    if (dados.length === 0) {
+        tabela.innerHTML = `<tr class="linhaVazia"><td colspan="11">Nenhum produto encontrado.</td></tr>`;
+        return;
+    }
+
+    tabela.innerHTML = dados.map(item => `
                    <tr class="${corLinha(item.quantidade, item.minimoEstoque)}">
                        <td>${item.codigoBarras}</td>
                        <td>${item.nomeProduto}</td>
@@ -324,27 +315,50 @@ const pesquisa = async (valorInput) => {
                        <td>${item.marca}</td>
                        <td>${item.localArmazenamento}</td>
                        <td>${item.minimoEstoque}</td>
-                       <td>${item.status}</td>
                        <td>${item.dataFabricacao}</td>
                        <td>${item.dataVencimento}</td>
                        <td class="acoesTabela">
                            <button type="button" class="btnAcao btnEditar" title="Editar" data-codigo="${item.id}">
                                <img src="../img/editar.png" alt="Editar" />
                            </button>
-                           <button type="button" class="btnAcao btnExcluir" title="Excluir" data-codigo="${item.id}">
-                               <img src="../img/excluir.png" alt="Excluir" />
+                           <button type="button" class="btnAcao btnExcluir" title="Remover" data-codigo="${item.id}">
+                               <img src="../img/remover.png" alt="Excluir" />
                            </button>
                        </td>
                    </tr>
-                   `;
-        tabela.innerHTML += linha;
-    });
+                   `).join("");
 }
 
-const pesquisaDebounced = debounce(pesquisa, 200);
+const pesquisa = (valorInput) => {
+    const termo = normalizar(valorInput).trim();
+
+    if (!termo) {
+        renderizarTabela(produtosCarregados.filter(p => p.status.toUpperCase() === "ATIVO"));
+        return;
+    }
+
+    const camposPesquisaveis = [
+        "codigoBarras",
+        "nomeProduto",
+        "fabricante",
+        "marca",
+        "localArmazenamento",
+        "dataFabricacao",
+        "dataVencimento"
+    ];
+
+    const resultado = produtosCarregados.filter(item => {
+        if (item.status.toUpperCase() !== "ATIVO") return false;
+        return camposPesquisaveis.some(campo => normalizar(item[campo]).includes(termo));
+    });
+
+    renderizarTabela(resultado);
+}
+
+const pesquisaDebounced = debounce(pesquisa, 150);
 
 const input = document.getElementById("pesquisa");
-input.addEventListener("change", async (e) => {
+input.addEventListener("input", (e) => {
     const valorInput = e.target.value;
     pesquisaDebounced(valorInput);
 });

@@ -52,7 +52,7 @@ function mostrarProximos(){
     const lista = produtos.filter(p => {
         const q = Number(p.quantidade);
         const min = Number(p.minimoEstoque);
-        return q > min && q <= min + 3;
+        return q >= min && q <= min + 3;
     });
     renderizar(lista, "Nenhum produto próximo do estoque mínimo.");
 }

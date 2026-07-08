@@ -6,7 +6,17 @@ public class UserModel {
     private String username;
     private String password;
     private String funcao;
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    private String nome;
+
     public UserModel(){
         
     }

@@ -20,10 +20,12 @@ public class PerfilController extends HttpServlet{
 
         String usuario = (String) session.getAttribute("usuario");
         String perfil = (String) session.getAttribute("perfil");
+        String nome = (String) session.getAttribute("nome");
 
         JsonObject json = new JsonObject();
         json.addProperty("usuario", usuario);
         json.addProperty("perfil", perfil);
+        json.addProperty("nome", nome);
 
         response.setContentType("application/json");
         response.getWriter().write(gson.toJson(json));

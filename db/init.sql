@@ -36,7 +36,7 @@ INSERT INTO users (
     sexo, dtaNascimento, email, telefone, funcao,
     cep, endereco, numero, bairro, cidade, estado, complemento
 ) VALUES (
-    'admin', '$2a$10$YjPKIe/vO8Ax38Ikz/Hnmuce8uTQXAs6xkQ3wIRApDL4bQwdpfbbi', 'Admin', 'Sistema', '0001', '000.000.000-00',
+    'admin', '$2a$12$4KkBgx/jlobGHQKdgEBIm.y26fdSbmjJfw49Si0qDUbF7BUqnTeG6', 'Admin', 'Sistema', '0001', '000.000.000-00',
     'Masculino', '1990-01-01', 'admin@email.com', '71999999999', 'Administrador',
     '40000-000', 'Rua Exemplo', '123', 'Centro', 'Salvador', 'BA', 'N/A'
 );

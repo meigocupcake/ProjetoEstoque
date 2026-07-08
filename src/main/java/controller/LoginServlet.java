@@ -34,6 +34,7 @@ public class LoginServlet extends HttpServlet{
             
             session.setAttribute("usuario", user.getUsername());
             session.setAttribute("perfil", user.getFuncao());
+            session.setAttribute("nome", user.getNome());
             response.sendRedirect(request.getContextPath() + "/pages/dashboard.html");
         }else{
             response.sendRedirect(request.getContextPath() + "/index.html");

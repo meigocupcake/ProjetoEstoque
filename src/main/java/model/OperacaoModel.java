@@ -7,10 +7,19 @@ public class OperacaoModel {
     private int quantidade;
     private String dataOperacao;
     private String nomeProduto;
+    private String codigoBarras;
 
+    public String getCodigoBarras() {
+        return codigoBarras;
+    }
+
+    public void setCodigoBarras(String codigoBarras) {
+        this.codigoBarras = codigoBarras;
+    }
     public String getNomeProduto() {
         return nomeProduto;
     }
+
     public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
     }

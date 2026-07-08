@@ -25,7 +25,7 @@ function debounce(func, delay) {
 function corLinha(val, base) {
     val = Number(val);
     base = Number(base);
-    if (val <= base)     return "fundoRepor";
+    if (val < base)     return "fundoRepor";
     if (val <= base + 3) return "fundoAtencao";
     return "fundoPadrao";
 }
@@ -97,35 +97,6 @@ async function carregarEstoque(){
 
     }catch(erro){
         console.log("Erro ao carregar os produtos", erro);
-    }
-}
-
-async function carregarResumo(){
-    try{
-        const response = await fetch("http://localhost:8080/api/resumo");
-
-        if (!response.ok) {
-            console.log("Resumo indisponível (status " + response.status + ")");
-            return;
-        }
-
-        const tipoConteudo = response.headers.get("content-type") || "";
-        if (!tipoConteudo.includes("application/json")) {
-            console.log("O endpoint /api/resumo não retornou JSON — resumo ignorado por enquanto.");
-            return;
-        }
-
-        const dados = await response.json();
-
-        const cardEntrada = document.getElementById("cardEntrada");
-        const cardSaida   = document.getElementById("cardSaida");
-        const cardTotal   = document.getElementById("cardTotal");
-        if (cardEntrada) cardEntrada.innerHTML = dados.entradaVal;
-        if (cardSaida)   cardSaida.innerHTML   = dados.saidaVal;
-        if (cardTotal)   cardTotal.innerHTML   = dados.totalVal;
-
-    }catch(erro){
-        console.log("Erro na consulta dos dados", erro);
     }
 }
 
@@ -221,6 +192,7 @@ function configurarModalEditar(){
             if (response.ok) {
                 modal.close();
                 carregarEstoque();
+                carregarHistorico();
             } else {
                 console.log("Não foi possível salvar as alterações", response.status);
             }
@@ -273,6 +245,7 @@ function configurarModalExcluir(){
             if (response.ok) {
                 modal.close();
                 carregarEstoque();
+                carregarHistorico();
 
             } else {
                 console.log("Não foi possível excluir o produto", response.status);
@@ -296,6 +269,7 @@ async function carregarHistorico(){
     dados.forEach(item =>{
         const linha = `
                    <tr>
+                        <td>${item.codigoBarras}</td>
                        <td>${item.nomeProduto}</td>
                        <td>${item.operacao}</td>
                        <td>${item.quantidade}</td>

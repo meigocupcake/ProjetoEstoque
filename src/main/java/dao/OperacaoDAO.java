@@ -39,7 +39,7 @@ public class OperacaoDAO {
     public List<OperacaoModel> getAll(){
         List<OperacaoModel> lista = new ArrayList<>();
 
-        String sql = "SELECT o.*, p.nome_produto FROM operacoes o " +
+        String sql = "SELECT o.*, p.* FROM operacoes o " +
                 "LEFT JOIN produtos p ON o.id_produto = p.id";
 
         try (Connection conn = ConnectionFactory.getConnection();
@@ -57,6 +57,7 @@ public class OperacaoDAO {
                     p.setDataOperacao(rs.getDate("data_operacao").toString());
                 }
 
+                p.setCodigoBarras(rs.getString("codigo_barras"));
                 p.setNomeProduto(rs.getString("nome_produto"));
 
                 lista.add(p);

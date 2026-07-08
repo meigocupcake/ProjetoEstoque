@@ -6,9 +6,9 @@ async function validarLogin() {
     const cargoUsuario = document.getElementById("cargoUsuario");
     const fotoPerfil = document.getElementById("fotoPerfil");
 
-    nomeUsuario.innerText = dado.usuario;
+    nomeUsuario.innerText = dado.nome;
     cargoUsuario.innerText = dado.perfil;
-    fotoPerfil.innerText = dado.usuario.charAt(0).toUpperCase();
+    fotoPerfil.innerText = dado.nome.charAt(0).toUpperCase();
 
 
     console.log("PERFIL FRONT: ", dado.perfil);

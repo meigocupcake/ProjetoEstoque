@@ -32,7 +32,8 @@ public class UserDAO {
                     user.setUsername(rs.getString("username"));
                     user.setPassword(hashBanco);
                     user.setFuncao(rs.getString("funcao"));
-                    
+                    user.setNome(rs.getString("nameFirst"));
+
                     return user;
                 }
             }
